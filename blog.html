@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Travel Blog | Pacha Tours and Travel</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="assets/common.css" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="assets/common.js"></script>
+	<script src="assets/translations.js"></script>
+</head>
+
+<body class="bg-white">
+	<div id="header-container"></div>
+
+	<main>
+		<!-- Hero Section -->
+		<section class="relative pt-32 pb-48 overflow-hidden min-h-[70vh] flex items-center">
+			<div class="absolute inset-0 bg-cover bg-center z-0"
+				 style="background-image: url('https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=1200&h=600&fit=crop');">
+				<div class="absolute inset-0 bg-black/50"></div>
+			</div>
+		
+			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+					Stories from the Road
+				</h1>
+				<p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+					Travel inspiration, tips, and tales from across Southern Africa
+				</p>
+			</div>
+		
+			<div class="absolute bottom-0 left-0 right-0 h-24 md:h-40 z-20">
+				<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0,120 L0,50 Q300,0 600,50 T1200,50 L1200,120 Z" fill="white" />
+				</svg>
+			</div>
+		</section>
+
+		<!-- Featured Post -->
+		<section class="py-16 md:py-24 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="mb-12">
+					<span class="text-primary font-semibold text-sm uppercase tracking-wider">Featured Story</span>
+				</div>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+					<div class="order-2 lg:order-1">
+						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+							10 Hidden Gems in South Africa You Need to Visit
+						</h2>
+						<p class="text-gray-600 text-lg mb-6 leading-relaxed">
+							Beyond the well-trodden paths of Cape Town and Kruger, South Africa hides countless treasures waiting to be discovered. From secret beaches to mountain villages, we've curated the ultimate list of off-the-beaten-path destinations.
+						</p>
+						<div class="flex items-center gap-4 text-sm text-gray-500 mb-8">
+							<span>By Sarah Johnson</span>
+							<span>•</span>
+							<span>Feb 15, 2026</span>
+							<span>•</span>
+							<span>8 min read</span>
+						</div>
+						<a href="#" class="inline-block bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary/90 transition-all">
+							Read More
+						</a>
+					</div>
+					<div class="order-1 lg:order-2">
+						<img src="https://images.unsplash.com/photo-1484542603127-984f4f7d14cb?w=800&h=600&fit=crop"
+							 alt="South Africa landscape"
+							 class="rounded-2xl shadow-2xl w-full h-96 object-cover">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Blog Grid -->
+		<section class="py-16 md:py-24 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Latest Stories</h2>
+					<p class="text-gray-600 text-lg">Travel tips, destination guides, and adventure tales</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Blog Post 1 -->
+					<article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group">
+						<div class="overflow-hidden h-56">
+							<img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&h=300&fit=crop"
+								 alt="Safari adventure"
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+						</div>
+						<div class="p-6">
+							<span class="text-primary font-semibold text-xs uppercase tracking-wider">Safari Tips</span>
+							<h3 class="text-xl font-bold text-gray-900 my-3">
+								First-Time Safari: What to Pack and What to Expect
+							</h3>
+							<p class="text-gray-600 text-sm mb-4">
+								Essential packing list and insider tips to make your first African safari unforgettable and stress-free.
+							</p>
+							<div class="flex items-center justify-between text-xs text-gray-500">
+								<span>Feb 10, 2026</span>
+								<a href="#" class="text-primary font-semibold hover:underline">Read More →</a>
+							</div>
+						</div>
+					</article>
+
+					<!-- Blog Post 2 -->
+					<article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group">
+						<div class="overflow-hidden h-56">
+							<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop"
+								 alt="Cape Town"
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+						</div>
+						<div class="p-6">
+							<span class="text-primary font-semibold text-xs uppercase tracking-wider">City Guide</span>
+							<h3 class="text-xl font-bold text-gray-900 my-3">
+								48 Hours in Cape Town: The Perfect Weekend Itinerary
+							</h3>
+							<p class="text-gray-600 text-sm mb-4">
+								Experience the best of Cape Town in just two days with this carefully crafted itinerary.
+							</p>
+							<div class="flex items-center justify-between text-xs text-gray-500">
+								<span>Feb 5, 2026</span>
+								<a href="#" class="text-primary font-semibold hover:underline">Read More →</a>
+							</div>
+						</div>
+					</article>
+
+					<!-- Blog Post 3 -->
+					<article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group">
+						<div class="overflow-hidden h-56">
+							<img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=300&fit=crop"
+								 alt="Adventure"
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+						</div>
+						<div class="p-6">
+							<span class="text-primary font-semibold text-xs uppercase tracking-wider">Adventure</span>
+							<h3 class="text-xl font-bold text-gray-900 my-3">
+								Hiking in the Drakensberg: A Complete Guide
+							</h3>
+							<p class="text-gray-600 text-sm mb-4">
+								Discover the majestic Drakensberg mountains with our comprehensive hiking guide for all skill levels.
+							</p>
+							<div class="flex items-center justify-between text-xs text-gray-500">
+								<span>Jan 28, 2026</span>
+								<a href="#" class="text-primary font-semibold hover:underline">Read More →</a>
+							</div>
+						</div>
+					</article>
+
+					<!-- Blog Post 4 -->
+					<article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group">
+						<div class="overflow-hidden h-56">
+							<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+								 alt="Culture"
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+						</div>
+						<div class="p-6">
+							<span class="text-primary font-semibold text-xs uppercase tracking-wider">Culture</span>
+							<h3 class="text-xl font-bold text-gray-900 my-3">
+								Understanding South African Culture and Customs
+							</h3>
+							<p class="text-gray-600 text-sm mb-4">
+								A respectful traveler's guide to navigating the diverse cultures and traditions of South Africa.
+							</p>
+							<div class="flex items-center justify-between text-xs text-gray-500">
+								<span>Jan 20, 2026</span>
+								<a href="#" class="text-primary font-semibold hover:underline">Read More →</a>
+							</div>
+						</div>
+					</article>
+
+					<!-- Blog Post 5 -->
+					<article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group">
+						<div class="overflow-hidden h-56">
+							<img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&h=300&fit=crop"
+								 alt="Wildlife"
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+						</div>
+						<div class="p-6">
+							<span class="text-primary font-semibold text-xs uppercase tracking-wider">Wildlife</span>
+							<h3 class="text-xl font-bold text-gray-900 my-3">
+								The Big Five: Where and When to Spot Them
+							</h3>
+							<p class="text-gray-600 text-sm mb-4">
+								Expert tips on finding lions, elephants, leopards, rhinos, and buffalo in their natural habitat.
+							</p>
+							<div class="flex items-center justify-between text-xs text-gray-500">
+								<span>Jan 15, 2026</span>
+								<a href="#" class="text-primary font-semibold hover:underline">Read More →</a>
+							</div>
+						</div>
+					</article>
+
+					<!-- Blog Post 6 -->
+					<article class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group">
+						<div class="overflow-hidden h-56">
+							<img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=300&fit=crop"
+								 alt="Food"
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+						</div>
+						<div class="p-6">
+							<span class="text-primary font-semibold text-xs uppercase tracking-wider">Food & Drink</span>
+							<h3 class="text-xl font-bold text-gray-900 my-3">
+								A Foodie's Guide to Cape Town's Best Restaurants
+							</h3>
+							<p class="text-gray-600 text-sm mb-4">
+								From fine dining to street food, discover the culinary delights of South Africa's food capital.
+							</p>
+							<div class="flex items-center justify-between text-xs text-gray-500">
+								<span>Jan 10, 2026</span>
+								<a href="#" class="text-primary font-semibold hover:underline">Read More →</a>
+							</div>
+						</div>
+					</article>
+				</div>
+
+				<!-- Load More -->
+				<div class="text-center mt-12">
+					<button class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-10 py-3 rounded-full font-semibold transition-all">
+						Load More Stories
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Newsletter -->
+		<section class="py-16 md:py-24 bg-white">
+			<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+					Never Miss an Adventure
+				</h2>
+				<p class="text-gray-600 text-lg mb-8">
+					Subscribe to our newsletter for travel tips, destination guides, and exclusive deals.
+				</p>
+				<form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+					<input type="email" 
+						   placeholder="Your email address" 
+						   class="flex-1 px-6 py-3 border-2 border-gray-300 rounded-full focus:outline-none focus:border-primary transition-all">
+					<button type="submit" 
+							class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-primary/90 transition-all whitespace-nowrap">
+						Subscribe
+					</button>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<div id="footer-container"></div>
+
+	<script>
+		initPage('blog');
+	</script>
+</body>
+
+</html>

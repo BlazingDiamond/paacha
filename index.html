@@ -6,113 +6,41 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Pacha Tours and Travel | Southern Africa Adventures</title>
 
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-		rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="assets/common.css" rel="stylesheet">
 	<script src="https://cdn.tailwindcss.com"></script>
-
-	<script>
-		tailwind.config = {
-			theme: {
-				extend: {
-					colors: {
-						background: 'hsl(var(--background))',
-						foreground: 'hsl(var(--foreground))',
-						primary: {
-							DEFAULT: 'hsl(var(--primary))',
-							foreground: 'hsl(var(--primary-foreground))',
-						},
-						secondary: 'hsl(var(--secondary))',
-						muted: 'hsl(var(--muted))',
-						accent: 'hsl(var(--accent))',
-						border: 'hsl(var(--border))',
-					},
-					fontFamily: {
-						poppins: ['Poppins', 'sans-serif'],
-					},
-					borderRadius: {
-						lg: 'var(--radius)',
-					}
-				}
-			}
-		}
-	</script>
-
-	<style type="text/css">
-		:root {
-			--background: 0 0% 100%;
-			--foreground: 0 0% 13%;
-			--primary: 85 17% 48%;
-			--primary-foreground: 0 0% 100%;
-			--secondary: 0 0% 20%;
-			--muted: 0 0% 90%;
-			--border: 0 0% 90%;
-			--radius: 0.5rem;
-		}
-
-		body {
-			background-color: hsl(var(--background));
-			color: hsl(var(--foreground));
-			font-family: 'Poppins', sans-serif;
-			-webkit-font-smoothing: antialiased;
-		}
-
-		/* Prevent word breaks from looking messy */
-		:where(p, span, li, h1, h2, h3, h4, h5, h6, a, button) {
-			overflow-wrap: anywhere;
-			word-break: break-word;
-		}
-
-		/* Smooth transition for the carousel dots */
-		.dot-transition {
-			transition: all 0.3s ease;
-		}
-	</style>
+	<script src="assets/common.js"></script>
+	<script src="assets/translations.js"></script>
 </head>
 
 <body class="bg-white">
-
-	<header class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-			<div class="font-bold text-2xl text-primary tracking-tight">PACHA TOURS</div>
-			<nav class="hidden md:flex space-x-8 font-medium text-gray-600">
-				<a href="#" class="hover:text-primary">Home</a>
-				<a href="#" class="hover:text-primary">Safaris</a>
-				<a href="#" class="hover:text-primary">Destinations</a>
-				<a href="#" class="hover:text-primary">About</a>
-			</nav>
-			<button class="bg-primary text-white px-6 py-2 rounded-full font-semibold text-sm">Book Now</button>
-		</div>
-	</header>
+	<div id="header-container"></div>
 
 	<main>
-		<section class="relative pt-32 pb-32 overflow-hidden min-h-[80vh] flex items-center">
-			<div class="absolute inset-0 bg-cover bg-center"
-				style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop');">
-				<div class="absolute inset-0 bg-black/40"></div>
+		<section class="relative pt-32 pb-48 overflow-hidden min-h-[85vh] flex items-center">
+			<div class="absolute inset-0 bg-cover bg-center z-0"
+				 style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop');">
+				<div class="absolute inset-0 bg-black/45"></div>
 			</div>
-
-			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-				<div class="inline-block bg-white text-gray-800 px-4 py-2 rounded text-xs font-bold mb-6">
-					WELCOME TO PACHA TOURS AND TRAVEL
-				</div>
-				<h1 class="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-					From Cape Town's Shores to<br>Johannesburg's Horizons
-				</h1>
-				<p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-10">
-					Across the rugged peaks of Lesotho and the lush valleys of Eswatini — Southern Africa calls. With
-					Pacha Tours & Travel, every step becomes a heartbeat in the rhythm of this land.
-				</p>
-				<button
-					class="bg-primary hover:scale-105 transition-transform text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl">
-					Start Your Adventure
-				</button>
+		
+		<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+			<div class="inline-block bg-white text-gray-800 px-4 py-2 rounded text-xs font-bold mb-6 tracking-widest uppercase" data-i18n="home.hero.welcome">
+				Welcome to Pacha Tours and Travel
 			</div>
-
-			<div class="absolute bottom-0 left-0 right-0 h-20">
-				<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 120"
-					xmlns="http://www.w3.org/2000/svg">
-					<path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="white" />
+			<h1 class="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight" data-i18n="home.hero.title">
+				From Cape Town's Shores to<br>Johannesburg's Horizons
+			</h1>
+			<p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-10" data-i18n="home.hero.description">
+				Across the rugged peaks of Lesotho and the lush valleys of Eswatini — Southern Africa calls.
+			</p>
+			<button class="bg-primary hover:scale-105 transition-transform text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl" data-i18n="home.hero.cta">
+				Start Your Adventure
+			</button>
+		</div>
+		
+			<div class="absolute bottom-0 left-0 right-0 h-24 md:h-40 z-20">
+				<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0,120 L0,50 Q300,0 600,50 T1200,50 L1200,120 Z" fill="white" />
 				</svg>
 			</div>
 		</section>
@@ -120,20 +48,20 @@
 		<section class="py-16 md:py-24 bg-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-					<div>
-						<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-							Why Travel with<br>Pacha Tours<br>and Travel?
-						</h2>
-						<p class="text-gray-600 text-lg mb-8 leading-relaxed">
-							We're more than a travel company — we're your local guide to the heart of Africa. With
-							decades of expertise, we craft authentic, safe, and unforgettable travel experiences
-							tailored just for you.
-						</p>
-						<button
-							class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full font-semibold transition-all">
-							Learn More
-						</button>
-					</div>
+				<div>
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6" data-i18n="home.whyTravel.title">
+						Why Travel with<br>Pacha Tours<br>and Travel?
+					</h2>
+					<p class="text-gray-600 text-lg mb-8 leading-relaxed" data-i18n="home.whyTravel.description">
+						We're more than a travel company — we're your local guide to the heart of Africa. With
+						decades of expertise, we craft authentic, safe, and unforgettable travel experiences
+						tailored just for you.
+					</p>
+					<button
+						class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full font-semibold transition-all" data-i18n="home.whyTravel.learnMore">
+						Learn More
+					</button>
+				</div>
 					<div class="grid grid-cols-2 gap-4">
 						<img src="https://images.unsplash.com/photo-1484542603127-984f4f7d14cb?w=400&h=500&fit=crop"
 							alt="Giraffe" class="rounded-lg w-full h-64 object-cover shadow-lg">
@@ -144,46 +72,46 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-gray-800 text-white">
+		<section class="py-16 md:py-24 bg-[#3E3B30;] text-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<div class="text-center group">
-						<div class="overflow-hidden rounded-lg mb-6">
-							<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop"
-								class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
-						</div>
-						<h3 class="text-2xl font-bold mb-4">Expertise You Can Trust</h3>
-						<p class="text-gray-400">Deep roots across Africa. Our guides bring insider knowledge you won't
-							find anywhere else.</p>
+				<div class="text-center group">
+					<div class="overflow-hidden rounded-lg mb-6">
+						<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop"
+							class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
 					</div>
-					<div class="text-center group">
-						<div class="overflow-hidden rounded-lg mb-6">
-							<img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=300&fit=crop"
-								class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
-						</div>
-						<h3 class="text-2xl font-bold mb-4">Tailored Itineraries</h3>
-						<p class="text-gray-400">We craft each journey to match your interests, pace, and dream
-							destinations.</p>
+					<h3 class="text-2xl font-bold mb-4" data-i18n="home.features.expertise.title">Expertise You Can Trust</h3>
+					<p class="text-gray-400" data-i18n="home.features.expertise.description">Deep roots across Africa. Our guides bring insider knowledge you won't
+						find anywhere else.</p>
+				</div>
+				<div class="text-center group">
+					<div class="overflow-hidden rounded-lg mb-6">
+						<img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=300&fit=crop"
+							class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
 					</div>
-					<div class="text-center group">
-						<div class="overflow-hidden rounded-lg mb-6">
-							<img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&h=300&fit=crop"
-								class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
-						</div>
-						<h3 class="text-2xl font-bold mb-4">Seamless & Safe</h3>
-						<p class="text-gray-400">We handle every detail—transport, hotels, and logistics—so you explore
-							with peace of mind.</p>
+					<h3 class="text-2xl font-bold mb-4" data-i18n="home.features.tailored.title">Tailored Itineraries</h3>
+					<p class="text-gray-400" data-i18n="home.features.tailored.description">We craft each journey to match your interests, pace, and dream
+						destinations.</p>
+				</div>
+				<div class="text-center group">
+					<div class="overflow-hidden rounded-lg mb-6">
+						<img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&h=300&fit=crop"
+							class="w-full h-64 object-cover group-hover:scale-110 transition duration-500">
 					</div>
+					<h3 class="text-2xl font-bold mb-4" data-i18n="home.features.seamless.title">Seamless & Safe</h3>
+					<p class="text-gray-400" data-i18n="home.features.seamless.description">We handle every detail—transport, hotels, and logistics—so you explore
+						with peace of mind.</p>
+				</div>
 				</div>
 			</div>
 		</section>
 
 		<section class="py-16 md:py-24 bg-white">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="text-center mb-12">
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Moments That Stay With You</h2>
-					<p class="text-gray-600 text-lg">Memories from our latest travelers across the continent.</p>
-				</div>
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="home.gallery.title">Moments That Stay With You</h2>
+				<p class="text-gray-600 text-lg" data-i18n="home.gallery.subtitle">Memories from our latest travelers across the continent.</p>
+			</div>
 				<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 					<img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400&h=300&fit=crop"
 						class="rounded-lg w-full h-48 object-cover hover:brightness-75 transition cursor-pointer">
@@ -207,9 +135,9 @@
 
 		<section class="py-16 md:py-24 bg-gray-50">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div class="text-center mb-12">
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Real Stories from Real Adventures</h2>
-				</div>
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="home.testimonials.title">Real Stories from Real Adventures</h2>
+			</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 					<div class="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition">
 						<p class="text-gray-700 text-sm leading-relaxed mb-4 italic">"From the moment we landed in
@@ -242,17 +170,19 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-white">
-			<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+	<section class="py-16 md:py-24 bg-white">
+		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<div id="proverb-container" class="proverb-container">
+				<h2 id="proverb-title" class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
 					He who does not know one thing knows another.
 				</h2>
-				<p class="text-gray-600 text-lg mb-8 italic">
+				<p id="proverb-description" class="text-gray-600 text-lg mb-8 italic">
 					Travel teaches humility — every place we visit has something new to teach us.<br>
-					<span class="font-semibold text-primary">African Proverb</span>
+					<span id="proverb-pro" class="font-semibold text-primary">African Proverb</span>
 				</p>
+			</div>
 
-				<div class="flex justify-center items-center gap-8">
+			<div class="flex justify-center items-center gap-8">
 					<button id="prevBtn"
 						class="p-2 border border-gray-200 rounded-full hover:bg-gray-50 transition text-gray-600">
 						<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -273,63 +203,54 @@
 			</div>
 		</section>
 
-		<section class="relative py-20 md:py-32 overflow-hidden">
-			<div class="absolute inset-0 bg-cover bg-center"
-				style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop');">
-				<div class="absolute inset-0 bg-black/60"></div>
-			</div>
-			<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-				<h2 class="text-4xl md:text-5xl font-bold mb-6">Start Your Journey Today</h2>
-				<p class="text-xl text-white/90 max-w-2xl mx-auto mb-10">Your unforgettable journey starts here. Let us
-					craft your perfect adventure.</p>
-				<button
-					class="bg-primary hover:bg-primary/90 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all shadow-xl">
-					Get Free Quote
-				</button>
-			</div>
-			<div class="absolute bottom-0 left-0 right-0 h-20">
-				<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1200 120"
-					xmlns="http://www.w3.org/2000/svg">
-					<path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="white" />
-				</svg>
-			</div>
-		</section>
+	<div id="cta-section"></div>
 	</main>
 
-	<footer class="bg-gray-900 text-white py-12">
-		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-				<div class="col-span-2">
-					<div class="text-primary font-bold text-2xl mb-4">PACHA TOURS</div>
-					<p class="text-gray-400 max-w-sm">Crafting unforgettable experiences across Southern Africa since
-						2010. Your safety and joy are our priority.</p>
-				</div>
-				<div>
-					<h4 class="font-bold mb-4">Links</h4>
-					<ul class="text-gray-400 space-y-2">
-						<li><a href="#" class="hover:text-primary">Destinations</a></li>
-						<li><a href="#" class="hover:text-primary">Terms of Service</a></li>
-						<li><a href="#" class="hover:text-primary">Privacy Policy</a></li>
-					</ul>
-				</div>
-				<div>
-					<h4 class="font-bold mb-4">Contact</h4>
-					<p class="text-gray-400">Johannesburg, South Africa</p>
-					<p class="text-gray-400">info@pachatours.com</p>
-				</div>
-			</div>
-			<div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-				&copy; 2026 Pacha Tours and Travel. All rights reserved.
-			</div>
-		</div>
-	</footer>
+	<div id="footer-container"></div>
 
 	<script>
-		let activeIndex = 0;
-		const totalSlides = 6;
-		const dotContainer = document.getElementById('dot-container');
+		// Initialize page with 'home' as active page
+		initPage('home');
+		
+		// Insert CTA section
+		insertCTA('cta-section', {
+			titleKey: 'home.cta.title',
+			descriptionKey: 'home.cta.description',
+			buttonTextKey: 'home.cta.button',
+			buttonLink: 'book-now.html'
+		});
 
-		function updateCarousel() {
+		// Proverb Carousel
+		let activeIndex = 0;
+		let isAnimating = false;
+		
+		// Array of proverbs - add your other two proverbs here
+		const proverbs = [
+			{
+				title: "He who does not know one thing knows another.",
+				description: "Travel teaches humility — every place we visit has something new to teach us.",
+				pro: "African Proverb"
+			},
+			{
+				title: "Wisdom is like a baobab tree; no one individual can embrace it.",
+				description: "Travel allows us to see the world throught the eyes of others, broadening our perspective and deepening our wisdom.",
+				pro: "Akan Proverb (Ghana)"
+			},
+			{
+				title: "The world is a book, and those who do not travel read only one page.",
+				description: "Travel enriches our lives by showing us chapters of culture, history, and nature that we could never experience at home.",
+				pro: "St. Augustine (North Africa)"
+			}
+		];
+		
+		const totalSlides = proverbs.length;
+		const dotContainer = document.getElementById('dot-container');
+		const proverbContainer = document.getElementById('proverb-container');
+		const proverbTitle = document.getElementById('proverb-title');
+		const proverbDescription = document.getElementById('proverb-description');
+		const proverbPro = document.getElementById('proverb-pro');
+
+		function updateDots() {
 			dotContainer.innerHTML = '';
 			for (let i = 0; i < totalSlides; i++) {
 				const dot = document.createElement('div');
@@ -338,18 +259,53 @@
 			}
 		}
 
+		function updateProverbContent() {
+			proverbTitle.textContent = proverbs[activeIndex].title;
+			proverbDescription.innerHTML = `${proverbs[activeIndex].description}<br><span class="font-semibold text-primary">${proverbs[activeIndex].pro}</span>`;
+			proverbPro.textContent = proverbs[activeIndex].pro;
+		}
+
+		function slideCarousel(direction) {
+			if (isAnimating) return;
+			isAnimating = true;
+
+			// Apply slide-out animation
+			const slideOutClass = direction === 'next' ? 'slide-out-left' : 'slide-out-right';
+			const slideInClass = direction === 'next' ? 'slide-in-right' : 'slide-in-left';
+			
+			proverbContainer.classList.add(slideOutClass);
+
+			// After slide-out animation completes
+			setTimeout(() => {
+				// Update content
+				updateProverbContent();
+				updateDots();
+				
+				// Remove slide-out and add slide-in
+				proverbContainer.classList.remove(slideOutClass);
+				proverbContainer.classList.add(slideInClass);
+
+				// After slide-in completes, remove animation class
+				setTimeout(() => {
+					proverbContainer.classList.remove(slideInClass);
+					isAnimating = false;
+				}, 400);
+			}, 400);
+		}
+
 		document.getElementById('nextBtn').addEventListener('click', () => {
 			activeIndex = (activeIndex + 1) % totalSlides;
-			updateCarousel();
+			slideCarousel('next');
 		});
 
 		document.getElementById('prevBtn').addEventListener('click', () => {
 			activeIndex = (activeIndex - 1 + totalSlides) % totalSlides;
-			updateCarousel();
+			slideCarousel('prev');
 		});
 
-		// Initialize dots
-		updateCarousel();
+		// Initialize dots and content
+		updateDots();
+		updateProverbContent();
 	</script>
 </body>
 

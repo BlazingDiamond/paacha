@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Book Your Tour | Pacha Tours and Travel</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link href="assets/common.css" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="assets/common.js"></script>
+	<script src="assets/translations.js"></script>
+</head>
+
+<body class="bg-white">
+	<div id="header-container"></div>
+
+	<main>
+		<!-- Hero Section -->
+		<section class="pt-32 pb-16 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+				<div class="inline-block bg-primary/10 text-primary px-4 py-2 rounded text-xs font-bold mb-6 tracking-widest uppercase">
+					Start Your Adventure
+				</div>
+				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
+					Book Your Dream<br>African Journey
+				</h1>
+				<p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+					<span id="step-description">Choose your destination to begin your adventure.</span>
+				</p>
+				<!-- Breadcrumb -->
+				<div id="breadcrumb" class="flex items-center justify-center gap-2 text-sm text-gray-500">
+					<span id="breadcrumb-country" class="font-semibold"></span>
+					<span id="breadcrumb-city" class="hidden"><span class="mx-2">›</span><span class="font-semibold"></span></span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Step 1: Country Selection -->
+		<section id="country-selection" class="py-16 md:py-24 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- South Africa -->
+					<div class="country-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+						 data-country="south-africa">
+						<div class="h-80 overflow-hidden">
+							<img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=600&h=800&fit=crop" 
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="South Africa">
+						</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+							<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+								<div class="text-4xl mb-3">🇿🇦</div>
+								<h3 class="text-2xl font-bold mb-2">South Africa</h3>
+								<p class="text-white/90 text-sm mb-4">The Rainbow Nation - diverse landscapes and vibrant culture.</p>
+								<div class="bg-white text-primary px-6 py-2 rounded-full font-semibold text-sm inline-block group-hover:bg-primary group-hover:text-white transition-all">
+									Explore Cities →
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Botswana -->
+					<div class="country-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+						 data-country="botswana">
+						<div class="h-80 overflow-hidden">
+							<img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600&h=800&fit=crop" 
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Botswana">
+						</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+							<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+								<div class="text-4xl mb-3">🇧🇼</div>
+								<h3 class="text-2xl font-bold mb-2">Botswana</h3>
+								<p class="text-white/90 text-sm mb-4">Pristine wilderness and luxury safari experiences.</p>
+								<div class="bg-white text-primary px-6 py-2 rounded-full font-semibold text-sm inline-block group-hover:bg-primary group-hover:text-white transition-all">
+									Explore Cities →
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Zimbabwe -->
+					<div class="country-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+						 data-country="zimbabwe">
+						<div class="h-80 overflow-hidden">
+							<img src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=600&h=800&fit=crop" 
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Zimbabwe">
+						</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+							<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+								<div class="text-4xl mb-3">🇿🇼</div>
+								<h3 class="text-2xl font-bold mb-2">Zimbabwe</h3>
+								<p class="text-white/90 text-sm mb-4">Home to Victoria Falls and incredible wildlife.</p>
+								<div class="bg-white text-primary px-6 py-2 rounded-full font-semibold text-sm inline-block group-hover:bg-primary group-hover:text-white transition-all">
+									Explore Cities →
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Eswatini -->
+					<div class="country-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+						 data-country="eswatini">
+						<div class="h-80 overflow-hidden">
+							<img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600&h=800&fit=crop" 
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Eswatini">
+						</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+							<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+								<div class="text-4xl mb-3">🇸🇿</div>
+								<h3 class="text-2xl font-bold mb-2">Eswatini</h3>
+								<p class="text-white/90 text-sm mb-4">Rich culture and stunning mountain landscapes.</p>
+								<div class="bg-white text-primary px-6 py-2 rounded-full font-semibold text-sm inline-block group-hover:bg-primary group-hover:text-white transition-all">
+									Explore Cities →
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Lesotho -->
+					<div class="country-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+						 data-country="lesotho">
+						<div class="h-80 overflow-hidden">
+							<img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=600&h=800&fit=crop" 
+								 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Lesotho">
+						</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+							<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+								<div class="text-4xl mb-3">🇱🇸</div>
+								<h3 class="text-2xl font-bold mb-2">Lesotho</h3>
+								<p class="text-white/90 text-sm mb-4">The Kingdom in the Sky - majestic highlands.</p>
+								<div class="bg-white text-primary px-6 py-2 rounded-full font-semibold text-sm inline-block group-hover:bg-primary group-hover:text-white transition-all">
+									Explore Cities →
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Custom -->
+					<div class="country-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+						 data-country="custom">
+						<div class="h-80 overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+							<div class="text-center p-8">
+								<div class="text-6xl mb-4">✨</div>
+								<h3 class="text-3xl font-bold text-gray-900 mb-3">Custom Tour</h3>
+								<p class="text-gray-600 text-base">Design your own unique itinerary</p>
+							</div>
+						</div>
+						<div class="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+							<div class="absolute bottom-0 left-0 right-0 p-6 text-center">
+								<div class="bg-primary text-white px-6 py-2 rounded-full font-semibold text-sm inline-block">
+									Create Custom Tour →
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Step 2: City Selection -->
+		<section id="city-selection" class="py-16 md:py-24 bg-white hidden">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<button id="back-to-countries" class="mb-8 flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-semibold">
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+					Back to Countries
+				</button>
+
+				<div class="text-center mb-12">
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" id="city-selection-title">Select Your City</h2>
+					<p class="text-gray-600 text-lg">Choose from the best destinations in <span id="selected-country-name"></span>.</p>
+				</div>
+
+				<div id="cities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Cities will be dynamically inserted here -->
+				</div>
+			</div>
+		</section>
+
+		<!-- Step 3: Custom Booking Form -->
+		<section id="custom-booking" class="py-16 md:py-24 bg-white hidden">
+			<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+				<button id="back-to-countries-from-custom" class="mb-8 flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-semibold">
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+					Back to Countries
+				</button>
+
+				<div class="bg-white border border-gray-200 rounded-3xl shadow-xl p-8 md:p-12">
+					<h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Tell Us About Your Journey</h2>
+					
+					<form class="space-y-6">
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div>
+								<label class="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
+								<input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="John">
+							</div>
+							<div>
+								<label class="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
+								<input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Doe">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div>
+								<label class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
+								<input type="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="john@example.com">
+							</div>
+							<div>
+								<label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+								<input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="+1 (555) 000-0000">
+							</div>
+						</div>
+
+						<div>
+							<label class="block text-sm font-semibold text-gray-700 mb-2">Country of Residence *</label>
+							<input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="United States">
+						</div>
+
+						<div class="border-t border-gray-200 pt-6 mt-8">
+							<h3 class="text-xl font-bold text-gray-900 mb-6">Trip Details</h3>
+
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div>
+									<label class="block text-sm font-semibold text-gray-700 mb-2">Tour Type *</label>
+									<select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+										<option value="">Select a tour type</option>
+										<option value="safari">Safari Adventure</option>
+										<option value="cultural">Cultural Experience</option>
+										<option value="city">City Tours</option>
+										<option value="beach">Beach & Coastal</option>
+										<option value="multi">Multi-Country Tour</option>
+									</select>
+								</div>
+
+								<div>
+									<label class="block text-sm font-semibold text-gray-700 mb-2">Preferred Start Date *</label>
+									<input type="date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+								</div>
+							</div>
+
+							<div class="mt-6">
+								<label class="block text-sm font-semibold text-gray-700 mb-2">Trip Duration</label>
+								<select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+									<option value="">Select duration</option>
+									<option value="3-5">3-5 Days</option>
+									<option value="6-9">6-9 Days</option>
+									<option value="10-14">10-14 Days</option>
+									<option value="15+">15+ Days</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="border-t border-gray-200 pt-6 mt-8">
+							<label class="block text-sm font-semibold text-gray-700 mb-2">Additional Details or Special Requests</label>
+							<textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Tell us about any special requirements, interests, dietary needs, or what you're hoping to experience..."></textarea>
+						</div>
+
+						<div class="pt-6">
+							<button type="submit" class="w-full bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary/90 hover:shadow-xl transition-all">
+								Request Your Custom Quote
+							</button>
+							<p class="text-center text-gray-500 text-sm mt-4">
+								We'll respond within 24 hours with a personalized itinerary and quote.
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<!-- Step 4: Checkout Details -->
+		<section id="checkout-details" class="py-16 md:py-24 bg-white hidden">
+			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+				<button id="back-to-cities" class="mb-8 flex items-center gap-2 text-gray-600 hover:text-primary transition-colors font-semibold">
+					<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+					</svg>
+					Back to Cities
+				</button>
+
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+					<!-- Left: City Details -->
+					<div>
+						<div class="rounded-2xl overflow-hidden shadow-lg mb-6">
+							<img id="city-detail-image" src="" class="w-full h-80 object-cover" alt="">
+						</div>
+						<h2 id="city-detail-name" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"></h2>
+						<p id="city-detail-description" class="text-gray-600 text-lg mb-6 leading-relaxed"></p>
+						
+						<div class="bg-gray-50 rounded-2xl p-6">
+							<h3 class="font-bold text-gray-900 mb-4">What's Included:</h3>
+							<ul id="city-inclusions" class="space-y-3">
+								<!-- Will be populated dynamically -->
+							</ul>
+						</div>
+					</div>
+
+					<!-- Right: Booking Form -->
+					<div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-lg">
+						<h3 class="text-2xl font-bold text-gray-900 mb-6">Booking Details</h3>
+
+						<form class="space-y-6">
+							<div>
+								<label class="block text-sm font-semibold text-gray-700 mb-4">Number of Travelers</label>
+								
+								<div class="space-y-4">
+									<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+										<div>
+											<p class="font-semibold text-gray-900">Adults</p>
+											<p class="text-sm text-gray-500">Ages 13+</p>
+										</div>
+										<div class="flex items-center gap-4">
+											<button type="button" id="decrease-adults" class="w-10 h-10 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-primary hover:text-primary transition-all">
+												<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+												</svg>
+											</button>
+											<span id="adults-count" class="text-xl font-bold text-gray-900 w-8 text-center">1</span>
+											<button type="button" id="increase-adults" class="w-10 h-10 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-primary hover:text-primary transition-all">
+												<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+												</svg>
+											</button>
+										</div>
+									</div>
+
+									<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+										<div>
+											<p class="font-semibold text-gray-900">Children</p>
+											<p class="text-sm text-gray-500">Ages 3-12</p>
+										</div>
+										<div class="flex items-center gap-4">
+											<button type="button" id="decrease-children" class="w-10 h-10 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-primary hover:text-primary transition-all">
+												<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+												</svg>
+											</button>
+											<span id="children-count" class="text-xl font-bold text-gray-900 w-8 text-center">0</span>
+											<button type="button" id="increase-children" class="w-10 h-10 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full hover:border-primary hover:text-primary transition-all">
+												<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+												</svg>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="border-t border-gray-200 pt-6">
+								<label class="block text-sm font-semibold text-gray-700 mb-2">Travel Date *</label>
+								<input type="date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
+							</div>
+
+							<div class="border-t border-gray-200 pt-6">
+								<div class="bg-primary/5 rounded-xl p-6">
+									<div class="flex justify-between items-center mb-2">
+										<span class="text-gray-600">Adults (<span id="price-adults-count">1</span> × $<span id="price-per-adult">1200</span>)</span>
+										<span class="font-semibold text-gray-900">$<span id="total-adults-price">1200</span></span>
+									</div>
+									<div class="flex justify-between items-center mb-4">
+										<span class="text-gray-600">Children (<span id="price-children-count">0</span> × $<span id="price-per-child">800</span>)</span>
+										<span class="font-semibold text-gray-900">$<span id="total-children-price">0</span></span>
+									</div>
+									<div class="border-t border-primary/20 pt-4 flex justify-between items-center">
+										<span class="text-xl font-bold text-gray-900">Total Price</span>
+										<span class="text-3xl font-bold text-primary">$<span id="grand-total">1200</span></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="pt-6">
+								<button type="submit" class="w-full bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-primary/90 hover:shadow-xl transition-all">
+									Proceed to Booking
+								</button>
+								<p class="text-center text-gray-500 text-sm mt-4">
+									You'll review all details before final confirmation.
+								</p>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<div id="footer-container"></div>
+
+	<script>
+		initPage('book-now');
+
+		// Booking data structure
+		const bookingData = {
+			'south-africa': {
+				name: 'South Africa',
+				cities: [
+					{
+						id: 'cape-town',
+						name: 'Cape Town',
+						description: 'Nestled between Table Mountain and the Atlantic Ocean, Cape Town offers stunning natural beauty, world-class beaches, vibrant culture, and the iconic Table Mountain cable car experience.',
+						image: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800&h=600&fit=crop',
+						priceAdult: 1200,
+						priceChild: 800,
+						inclusions: ['3-day guided tour', 'Table Mountain cable car', 'Hotel accommodation', 'Airport transfers', 'City highlights tour']
+					},
+					{
+						id: 'johannesburg',
+						name: 'Johannesburg',
+						description: 'The City of Gold pulses with energy, history, and culture. Explore Soweto, visit the Apartheid Museum, and experience the vibrant urban heart of South Africa.',
+						image: 'https://images.unsplash.com/photo-1577948000111-9c970dfe3743?w=800&h=600&fit=crop',
+						priceAdult: 900,
+						priceChild: 600,
+						inclusions: ['2-day city tour', 'Soweto cultural experience', 'Apartheid Museum entry', 'Hotel accommodation', 'All meals included']
+					},
+					{
+						id: 'durban',
+						name: 'Durban',
+						description: 'Golden beaches meet warm Indian Ocean waters in this multicultural coastal paradise. Enjoy surfing, curry cuisine, and the beautiful Golden Mile beachfront.',
+						image: 'https://images.unsplash.com/photo-1590073844006-33379778ae09?w=800&h=600&fit=crop',
+						priceAdult: 1000,
+						priceChild: 700,
+						inclusions: ['3-day beach resort', 'Water sports activities', 'Cultural food tour', 'Hotel accommodation', 'Beach equipment rental']
+					},
+					{
+						id: 'kruger',
+						name: 'Kruger National Park',
+						description: 'Africa\'s premier wildlife destination. Experience unforgettable game drives, spot the Big Five, and witness nature in its most magnificent form.',
+						image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&h=600&fit=crop',
+						priceAdult: 1800,
+						priceChild: 1200,
+						inclusions: ['4-day safari package', 'Morning & evening game drives', 'Luxury lodge accommodation', 'All meals included', 'Expert ranger guide']
+					}
+				]
+			},
+			'botswana': {
+				name: 'Botswana',
+				cities: [
+					{
+						id: 'okavango',
+						name: 'Okavango Delta',
+						description: 'A UNESCO World Heritage Site where the desert meets water. Experience mokoro canoe rides through pristine channels and incredible wildlife viewing.',
+						image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&h=600&fit=crop',
+						priceAdult: 2400,
+						priceChild: 1600,
+						inclusions: ['5-day delta experience', 'Mokoro canoe excursions', 'Luxury tented camp', 'All meals & drinks', 'Professional guides', 'Bush walks']
+					},
+					{
+						id: 'chobe',
+						name: 'Chobe National Park',
+						description: 'Famous for massive elephant herds along the Chobe River. Enjoy boat safaris and witness one of Africa\'s greatest concentrations of wildlife.',
+						image: 'https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=800&h=600&fit=crop',
+						priceAdult: 2000,
+						priceChild: 1400,
+						inclusions: ['4-day safari', 'River boat cruises', 'Game drives', 'Lodge accommodation', 'All meals included']
+					},
+					{
+						id: 'maun',
+						name: 'Maun',
+						description: 'The gateway to the Okavango Delta. This charming town offers local markets, cultural experiences, and access to scenic flights over the delta.',
+						image: 'https://images.unsplash.com/photo-1569098034542-4499c90a5c4e?w=800&h=600&fit=crop',
+						priceAdult: 800,
+						priceChild: 500,
+						inclusions: ['2-day city tour', 'Local market visits', 'Cultural village tour', 'Hotel accommodation', 'Scenic flight option']
+					}
+				]
+			},
+			'zimbabwe': {
+				name: 'Zimbabwe',
+				cities: [
+					{
+						id: 'victoria-falls',
+						name: 'Victoria Falls',
+						description: 'One of the Seven Natural Wonders of the World. Experience the thundering falls, adventure activities, and the Zambezi River\'s raw power.',
+						image: 'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800&h=600&fit=crop',
+						priceAdult: 1600,
+						priceChild: 1100,
+						inclusions: ['3-day falls experience', 'Guided falls tour', 'Sunset cruise', 'Hotel accommodation', 'Activity options (bungee, rafting)']
+					},
+					{
+						id: 'hwange',
+						name: 'Hwange National Park',
+						description: 'Zimbabwe\'s largest national park with diverse ecosystems. Famous for large elephant populations and excellent predator viewing.',
+						image: 'https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=800&h=600&fit=crop',
+						priceAdult: 1900,
+						priceChild: 1300,
+						inclusions: ['4-day safari', 'Game drives', 'Bush camp accommodation', 'All meals', 'Expert guides']
+					},
+					{
+						id: 'harare',
+						name: 'Harare',
+						description: 'Zimbabwe\'s vibrant capital city. Discover art galleries, bustling markets, botanical gardens, and the warm hospitality of the Shona people.',
+						image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop',
+						priceAdult: 700,
+						priceChild: 450,
+						inclusions: ['2-day city tour', 'National Gallery visit', 'Market experiences', 'Hotel accommodation', 'Cultural shows']
+					}
+				]
+			},
+			'eswatini': {
+				name: 'Eswatini',
+				cities: [
+					{
+						id: 'mbabane',
+						name: 'Mbabane',
+						description: 'The capital nestled in the Dlangeni Hills. Experience traditional Swazi culture, craft markets, and stunning mountain views.',
+						image: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800&h=600&fit=crop',
+						priceAdult: 850,
+						priceChild: 550,
+						inclusions: ['2-day cultural tour', 'Craft market visits', 'Traditional village experience', 'Hotel accommodation', 'Cultural performances']
+					},
+					{
+						id: 'hlane',
+						name: 'Hlane Royal National Park',
+						description: 'See lions, elephants, and rhinos in Eswatini\'s premier wildlife reserve. Small and intimate park with excellent viewing opportunities.',
+						image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800&h=600&fit=crop',
+						priceAdult: 1100,
+						priceChild: 750,
+						inclusions: ['3-day safari', 'Game drives', 'Lodge accommodation', 'Meals included', 'Guided walks']
+					},
+					{
+						id: 'ezulwini',
+						name: 'Ezulwini Valley',
+						description: 'The "Valley of Heaven" with hot springs, wildlife sanctuaries, and cultural villages showcasing traditional Swazi life.',
+						image: 'https://images.unsplash.com/photo-1502301197179-65228ab57f78?w=800&h=600&fit=crop',
+						priceAdult: 900,
+						priceChild: 600,
+						inclusions: ['2-day valley tour', 'Hot springs visit', 'Wildlife sanctuary', 'Cultural village', 'Hotel accommodation']
+					}
+				]
+			},
+			'lesotho': {
+				name: 'Lesotho',
+				cities: [
+					{
+						id: 'maseru',
+						name: 'Maseru',
+						description: 'The capital city on the Caledon River. Gateway to the highlands with a blend of traditional Basotho culture and modern life.',
+						image: 'https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=800&h=600&fit=crop',
+						priceAdult: 750,
+						priceChild: 500,
+						inclusions: ['2-day city tour', 'Craft markets', 'Cultural center visit', 'Hotel accommodation', 'Traditional meals']
+					},
+					{
+						id: 'sani-pass',
+						name: 'Sani Pass',
+						description: 'An epic 4x4 adventure to the highest pub in Africa. Navigate hairpin bends with breathtaking views of the Drakensberg mountains.',
+						image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+						priceAdult: 1300,
+						priceChild: 900,
+						inclusions: ['Full-day 4x4 experience', 'Highest pub visit', 'Mountain lodge lunch', 'Expert driver/guide', 'Border crossing assistance']
+					},
+					{
+						id: 'maletsunyane',
+						name: 'Maletsunyane Falls',
+						description: 'One of the highest single-drop waterfalls in Southern Africa. Adventure activities include abseiling and stunning hiking trails.',
+						image: 'https://images.unsplash.com/photo-1473445361085-b69e5cbc0669?w=800&h=600&fit=crop',
+						priceAdult: 950,
+						priceChild: 650,
+						inclusions: ['2-day adventure', 'Waterfall viewing', 'Hiking trails', 'Mountain lodge stay', 'Traditional Basotho dinner']
+					}
+				]
+			}
+		};
+
+		// State management
+		let currentView = 'countries';
+		let selectedCountry = null;
+		let selectedCity = null;
+		let adultsCount = 1;
+		let childrenCount = 0;
+
+		// DOM elements
+		const countrySelection = document.getElementById('country-selection');
+		const citySelection = document.getElementById('city-selection');
+		const customBooking = document.getElementById('custom-booking');
+		const checkoutDetails = document.getElementById('checkout-details');
+		const stepDescription = document.getElementById('step-description');
+		const breadcrumbCountry = document.getElementById('breadcrumb-country');
+		const breadcrumbCity = document.getElementById('breadcrumb-city');
+
+		// Show country cards
+		function showCountrySelection() {
+			currentView = 'countries';
+			countrySelection.classList.remove('hidden');
+			citySelection.classList.add('hidden');
+			customBooking.classList.add('hidden');
+			checkoutDetails.classList.add('hidden');
+			stepDescription.textContent = 'Choose your destination to begin your adventure.';
+			breadcrumbCountry.textContent = '';
+			breadcrumbCity.classList.add('hidden');
+		}
+
+		// Show city cards
+		function showCitySelection(countryId) {
+			selectedCountry = countryId;
+			const country = bookingData[countryId];
+			
+			currentView = 'cities';
+			countrySelection.classList.add('hidden');
+			citySelection.classList.remove('hidden');
+			customBooking.classList.add('hidden');
+			checkoutDetails.classList.add('hidden');
+
+			document.getElementById('selected-country-name').textContent = country.name;
+			document.getElementById('city-selection-title').textContent = `Select Your City in ${country.name}`;
+			stepDescription.textContent = `Choose from the best destinations in ${country.name}.`;
+			breadcrumbCountry.textContent = country.name;
+			breadcrumbCity.classList.add('hidden');
+
+			// Generate city cards
+			const citiesGrid = document.getElementById('cities-grid');
+			citiesGrid.innerHTML = country.cities.map(city => `
+				<div class="city-card group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+					 data-city-id="${city.id}">
+					<div class="h-80 overflow-hidden">
+						<img src="${city.image}" 
+							 class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="${city.name}">
+					</div>
+					<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+						<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+							<h3 class="text-2xl font-bold mb-2">${city.name}</h3>
+							<p class="text-white/90 text-sm mb-3">${city.description.substring(0, 100)}...</p>
+							<div class="flex items-center justify-between">
+								<span class="text-sm">From <span class="text-lg font-bold">$${city.priceAdult}</span>/person</span>
+								<div class="bg-white text-primary px-4 py-2 rounded-full font-semibold text-sm group-hover:bg-primary group-hover:text-white transition-all">
+									View Details →
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			`).join('');
+
+			// Add click listeners to city cards
+			document.querySelectorAll('.city-card').forEach(card => {
+				card.addEventListener('click', () => {
+					const cityId = card.dataset.cityId;
+					showCheckoutDetails(countryId, cityId);
+				});
+			});
+		}
+
+		// Show custom booking form
+		function showCustomBooking() {
+			currentView = 'custom';
+			countrySelection.classList.add('hidden');
+			citySelection.classList.add('hidden');
+			customBooking.classList.remove('hidden');
+			checkoutDetails.classList.add('hidden');
+			stepDescription.textContent = 'Design your own custom itinerary with our travel experts.';
+			breadcrumbCountry.textContent = 'Custom Tour';
+			breadcrumbCity.classList.add('hidden');
+		}
+
+		// Show checkout details
+		function showCheckoutDetails(countryId, cityId) {
+			selectedCountry = countryId;
+			selectedCity = cityId;
+			const country = bookingData[countryId];
+			const city = country.cities.find(c => c.id === cityId);
+
+			currentView = 'checkout';
+			countrySelection.classList.add('hidden');
+			citySelection.classList.add('hidden');
+			customBooking.classList.add('hidden');
+			checkoutDetails.classList.remove('hidden');
+
+			// Update breadcrumb
+			breadcrumbCountry.textContent = country.name;
+			breadcrumbCity.classList.remove('hidden');
+			breadcrumbCity.querySelector('.font-semibold').textContent = city.name;
+			stepDescription.textContent = 'Complete your booking details and pricing.';
+
+			// Populate city details
+			document.getElementById('city-detail-image').src = city.image;
+			document.getElementById('city-detail-image').alt = city.name;
+			document.getElementById('city-detail-name').textContent = city.name;
+			document.getElementById('city-detail-description').textContent = city.description;
+
+			// Populate inclusions
+			const inclusionsList = document.getElementById('city-inclusions');
+			inclusionsList.innerHTML = city.inclusions.map(item => `
+				<li class="flex items-start gap-3">
+					<svg class="w-5 h-5 text-primary flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+					</svg>
+					<span class="text-gray-700">${item}</span>
+				</li>
+			`).join('');
+
+			// Set pricing
+			document.getElementById('price-per-adult').textContent = city.priceAdult;
+			document.getElementById('price-per-child').textContent = city.priceChild;
+
+			// Reset counts
+			adultsCount = 1;
+			childrenCount = 0;
+			document.getElementById('adults-count').textContent = adultsCount;
+			document.getElementById('children-count').textContent = childrenCount;
+
+			updatePricing(city.priceAdult, city.priceChild);
+		}
+
+		// Update pricing calculations
+		function updatePricing(adultPrice, childPrice) {
+			const adultsTotal = adultsCount * adultPrice;
+			const childrenTotal = childrenCount * childPrice;
+			const grandTotal = adultsTotal + childrenTotal;
+
+			document.getElementById('price-adults-count').textContent = adultsCount;
+			document.getElementById('price-children-count').textContent = childrenCount;
+			document.getElementById('total-adults-price').textContent = adultsTotal;
+			document.getElementById('total-children-price').textContent = childrenTotal;
+			document.getElementById('grand-total').textContent = grandTotal;
+		}
+
+		// Event listeners for country cards
+		document.querySelectorAll('.country-card').forEach(card => {
+			card.addEventListener('click', () => {
+				const countryId = card.dataset.country;
+				if (countryId === 'custom') {
+					showCustomBooking();
+				} else {
+					showCitySelection(countryId);
+				}
+			});
+		});
+
+		// Back buttons
+		document.getElementById('back-to-countries').addEventListener('click', showCountrySelection);
+		document.getElementById('back-to-countries-from-custom').addEventListener('click', showCountrySelection);
+		document.getElementById('back-to-cities').addEventListener('click', () => {
+			showCitySelection(selectedCountry);
+		});
+
+		// Adults counter
+		document.getElementById('increase-adults').addEventListener('click', () => {
+			adultsCount++;
+			const city = bookingData[selectedCountry].cities.find(c => c.id === selectedCity);
+			document.getElementById('adults-count').textContent = adultsCount;
+			updatePricing(city.priceAdult, city.priceChild);
+		});
+
+		document.getElementById('decrease-adults').addEventListener('click', () => {
+			if (adultsCount > 1) {
+				adultsCount--;
+				const city = bookingData[selectedCountry].cities.find(c => c.id === selectedCity);
+				document.getElementById('adults-count').textContent = adultsCount;
+				updatePricing(city.priceAdult, city.priceChild);
+			}
+		});
+
+		// Children counter
+		document.getElementById('increase-children').addEventListener('click', () => {
+			childrenCount++;
+			const city = bookingData[selectedCountry].cities.find(c => c.id === selectedCity);
+			document.getElementById('children-count').textContent = childrenCount;
+			updatePricing(city.priceAdult, city.priceChild);
+		});
+
+		document.getElementById('decrease-children').addEventListener('click', () => {
+			if (childrenCount > 0) {
+				childrenCount--;
+				const city = bookingData[selectedCountry].cities.find(c => c.id === selectedCity);
+				document.getElementById('children-count').textContent = childrenCount;
+				updatePricing(city.priceAdult, city.priceChild);
+			}
+		});
+	</script>
+</body>
+
+</html>
