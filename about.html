@@ -9,10 +9,10 @@
 	<script src="assets/translations.js"></script>
     <title>About Us - Pacha Tours</title>
 </head>
-<body class="bg-white font-sans text-gray-900">
+<body class="bg-white font-sans text-gray-900 page-fade-in">
 	<div id="header-container"></div>
     <div class="pt-20">
-        <section class="relative h-96 md:h-[500px] overflow-hidden">
+        <section class="relative h-96 md:h-[500px] overflow-hidden fade-in-up">
             <div class="absolute inset-0 bg-black">
                 <img
                     src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop"
@@ -22,10 +22,10 @@
             </div>
 
             <div class="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-4">
-                <div class="bg-white text-stone-900 px-4 py-1 rounded text-xs font-bold mb-4 tracking-widest uppercase">
+                <div class="bg-white text-stone-900 px-4 py-1 rounded text-xs font-bold mb-4 tracking-widest uppercase" data-i18n="about.hero.badge">
                     About Us
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold max-w-3xl leading-tight">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold max-w-3xl leading-tight" data-i18n="about.hero.title">
                     Your Gateway to Tours and Travel
                 </h1>
             </div>
@@ -35,13 +35,13 @@
             </svg>
         </section>
 
-        <section class="py-16 md:py-24 px-6 bg-white">
+        <section class="py-16 md:py-24 px-6 bg-white fade-in-up">
             <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6" data-i18n="about.intro.title">
                         Born in Africa, Built on Passion
                     </h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8" data-i18n="about.intro.body">
                         Your gateway to exploring the vibrant tapestry of Southern Africa. With years of collective
                         experience in the tourism industry, our dedicated team of seasoned tour consultants and adventure
                         enthusiasts is excited to introduce you to a new chapter in travel excellence.
@@ -57,7 +57,7 @@
             </div>
         </section>
 
-        <section class="py-16 md:py-24 px-6 bg-stone-800 text-white">
+        <section class="py-16 md:py-24 px-6 bg-stone-800 text-white fade-in-up">
             <div class="max-w-7xl mx-auto">
                 <div class="grid md:grid-cols-3 gap-12 mb-16">
                     <div class="text-center group">
@@ -68,8 +68,8 @@
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">Expertise You Can Trust</h3>
-                        <p class="text-stone-300 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-4" data-i18n="home.features.expertise.title">Expertise You Can Trust</h3>
+                        <p class="text-stone-300 leading-relaxed" data-i18n="home.features.expertise.description">
                             With deep roots across Africa, our guides and partners bring insider knowledge and authentic local
                             experiences you won't find anywhere else.
                         </p>
@@ -83,8 +83,8 @@
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">Itineraries, Tailored for You</h3>
-                        <p class="text-stone-300 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-4" data-i18n="home.features.tailored.title">Itineraries, Tailored for You</h3>
+                        <p class="text-stone-300 leading-relaxed" data-i18n="home.features.tailored.description">
                             No two travelers are the same. We craft each journey to match your interests, pace, and dream
                             destinations — from safaris to hidden gems.
                         </p>
@@ -98,8 +98,8 @@
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>
-                        <h3 class="text-2xl font-bold mb-4">Seamless & Safe Travel</h3>
-                        <p class="text-stone-300 leading-relaxed">
+                        <h3 class="text-2xl font-bold mb-4" data-i18n="home.features.seamless.title">Seamless & Safe Travel</h3>
+                        <p class="text-stone-300 leading-relaxed" data-i18n="home.features.seamless.description">
                             We handle every detail: transport, accommodations, and logistics, so you can explore with peace and
                             focus on the experience.
                         </p>
@@ -107,14 +107,14 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <button class="bg-white text-stone-800 hover:bg-stone-100 px-10 py-4 rounded-full font-bold transition-all shadow-lg transform hover:-translate-y-1">
+                    <button class="bg-white text-stone-800 hover:bg-stone-100 px-10 py-4 rounded-full font-bold transition-all shadow-lg transform hover:-translate-y-1" data-i18n="home.whyTravel.learnMore">
                         Learn More
                     </button>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 md:py-28 px-6 bg-stone-50">
+        <section class="py-20 md:py-28 px-6 bg-stone-50 fade-in-up">
             <div class="max-w-4xl mx-auto text-center">
                 <div class="flex flex-col md:flex-row justify-center gap-8 items-center mb-12">
                     <button class="hidden md:block p-3 rounded-full border border-stone-200 hover:bg-stone-200 transition">
@@ -147,13 +147,36 @@
     </div>
 	<div id="footer-container"></div>
 <script>
-	initPage('home');
+	initPage('about');
 
 	insertCTA('cta-section', {
 		title: 'Start Your Journey Today',
 		description: 'Your unforgettable journey starts here. Let us craft your perfect adventure.',
 		buttonText: 'Get Free Quote',
-		buttonLink: 'book-now.html'
+		buttonLink: 'book-now.html',
+		titleKey: 'about.cta.title',
+		descriptionKey: 'about.cta.description',
+		buttonTextKey: 'about.cta.button'
+	});
+
+	// Scroll-in animation for sections
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		},
+		{
+			threshold: 0.15
+		}
+	);
+
+	document.querySelectorAll('.fade-in-up').forEach((section, index) => {
+		section.classList.add(`delay-${Math.min(index, 3)}`);
+		observer.observe(section);
 	});
 </script>
 </body>

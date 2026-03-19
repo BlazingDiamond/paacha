@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour | Pacha Tours</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <link href="assets/common.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/common.js"></script>
+  <script src="assets/translations.js"></script>
+  <script src="assets/auth.js"></script>
+  <script src="assets/tour-data.js"></script>
+  <script src="assets/map-component.js"></script>
+  <style>
+    .photo-thumb { transition: all 0.2s ease; cursor: pointer; }
+    .photo-thumb:hover, .photo-thumb.active { opacity: 1; border-color: hsl(85 17% 48%); }
+    .photo-thumb { opacity: 0.6; border: 2px solid transparent; }
+    .itinerary-item { cursor: pointer; transition: all 0.2s ease; }
+    .itinerary-item:hover { background: #f8f7f5; }
+    .itinerary-item.active { background: #f0f4ea; border-left: 3px solid hsl(85 17% 48%); }
+    .itinerary-item.visited { background: #f8f9f5; }
+    .day-badge-active { background: hsl(85 17% 48%); color: white; }
+    .day-badge { background: #e8e4dc; color: #5a5040; }
+    .sticky-book { position: sticky; top: 88px; }
+    .include-check { color: hsl(85 17% 48%); }
+    .exclude-x { color: #ef4444; }
+    /* Route pin pulse animation */
+    @keyframes routePulse {
+      0%,100% { r: 6; opacity: 1; }
+      50% { r: 9; opacity: 0.6; }
+    }
+    .active-pin circle:first-child { animation: routePulse 1.5s ease-in-out infinite; }
+    /* Photo gallery fade */
+    #hero-photo { transition: opacity 0.4s ease; }
+    .hero-fade { opacity: 0 !important; }
+    /* Progress bar */
+    #route-progress { transition: width 0.6s ease; }
+    /* Itinerary scroll */
+    #itinerary-list { max-height: 460px; overflow-y: auto; scrollbar-width: thin; }
+    .tab-btn.active { background: hsl(85 17% 48%); color: white; }
+    .tab-btn { transition: all 0.2s ease; }
+    .section-card { scroll-margin-top: 100px; }
+  </style>
+</head>
+<body class="bg-stone-50 page-fade-in">
+  <div id="header-container"></div>
+  <main id="tour-main" class="pt-20">
+    <div id="tour-content" class="opacity-0 transition-opacity duration-500">
+      <!-- Filled by JS -->
+    </div>
+  </main>
+  <div id="footer-container"></div>
+
+  <script>
+  initPage('');
+
+  const params = new URLSearchParams(location.search);
+  const tourId = params.get('id');
+  const tourType = params.get('type'); // city | country | multi
+
+  let tour;
+  if (tourType === 'multi') {
+    tour = TOUR_DATA.multiCountryTours.find(t => t.id === tourId);
+  } else if (tourType === 'country') {
+    tour = TOUR_DATA.countryTours.find(t => t.id === tourId);
+  } else {
+    tour = TOUR_DATA.cityTours.find(t => t.id === tourId);
+  }
+
+  if (!tour) { location.href = 'book-now.html'; }
+
+  document.title = `${tour.name} | Pacha Tours`;
+
+  // ---- Build breadcrumb ----
+  function buildBreadcrumb() {
+    if (tourType === 'multi') {
+      return `<a href="book-now.html">Explore</a> <span class="text-stone-300 mx-1">/</span> <a href="multi-country.html">Multi-Country Tours</a> <span class="text-stone-300 mx-1">/</span> <span class="font-semibold text-stone-800">${tour.name}</span>`;
+    } else {
+      const cc = tour.country;
+      const c = TOUR_DATA.countries[cc];
+      return `<a href="book-now.html">Explore</a> <span class="text-stone-300 mx-1">/</span> <a href="country.html?c=${cc}">${c?.name||cc}</a> <span class="text-stone-300 mx-1">/</span> <span class="font-semibold text-stone-800">${tour.name}</span>`;
+    }
+  }
+
+  // ---- Photo gallery ----
+  let photoIndex = 0;
+  function buildPhotos() {
+    const photos = tour.photos || [tour.heroImage];
+    return `
+      <div class="relative overflow-hidden rounded-none md:rounded-2xl" style="height:420px;">
+        <img id="hero-photo" src="${photos[0]}" alt="${tour.name}" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+        <!-- Nav arrows -->
+        <button onclick="changePhoto(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="changePhoto(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md transition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="flex gap-2 mt-2 px-1">
+        ${photos.map((p,i) => `<img src="${p}" alt="photo ${i+1}" onclick="setPhoto(${i})" class="photo-thumb rounded-lg flex-1 h-16 object-cover ${i===0?'active':''}">`).join('')}
+      </div>`;
+  }
+  window.changePhoto = (dir) => {
+    const photos = tour.photos || [tour.heroImage];
+    photoIndex = (photoIndex + dir + photos.length) % photos.length;
+    setPhoto(photoIndex);
+  };
+  window.setPhoto = (i) => {
+    const photos = tour.photos || [tour.heroImage];
+    const img = document.getElementById('hero-photo');
+    img.classList.add('hero-fade');
+    setTimeout(() => { img.src = photos[i]; img.classList.remove('hero-fade'); }, 350);
+    photoIndex = i;
+    document.querySelectorAll('.photo-thumb').forEach((t,j) => t.classList.toggle('active', j === i));
+  };
+
+  // ---- Highlights ----
+  function buildHighlights() {
+    return `<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      ${(tour.highlights||[]).map(h => `
+        <div class="flex items-start gap-3 bg-white rounded-xl p-3 border border-stone-100">
+          <span class="text-2xl">${h.icon}</span>
+          <span class="text-stone-700 text-sm">${h.text}</span>
+        </div>`).join('')}
+    </div>`;
+  }
+
+  // ---- Included / Not Included ----
+  function buildIncludes() {
+    return `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h4 class="font-bold text-stone-800 mb-3 flex items-center gap-2"><span class="text-primary text-lg">✓</span> What's Included</h4>
+          <ul class="space-y-2">
+            ${(tour.included||[]).map(i => `<li class="flex items-start gap-2 text-sm text-stone-600"><span class="include-check font-bold mt-0.5">✓</span>${i}</li>`).join('')}
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-stone-800 mb-3 flex items-center gap-2"><span class="text-red-400 text-lg">✕</span> Not Included</h4>
+          <ul class="space-y-2">
+            ${(tour.notIncluded||[]).map(i => `<li class="flex items-start gap-2 text-sm text-stone-500"><span class="exclude-x font-bold mt-0.5">✕</span>${i}</li>`).join('')}
+          </ul>
+        </div>
+      </div>`;
+  }
+
+  // ---- Itinerary list ----
+  function buildItineraryList() {
+    return (tour.itinerary||[]).map((d, i) => {
+      const pin = TOUR_DATA.pins[d.pin];
+      const countryFlag = d.country ? TOUR_DATA.countries[d.country]?.flag || '' : '';
+      return `
+        <div class="itinerary-item ${i===0?'active':''} rounded-xl px-4 py-3 border-l-3 border-transparent"
+             id="itin-item-${i}" onclick="selectDay(${i})">
+          <div class="flex items-start gap-3">
+            <div class="day-badge ${i===0?'day-badge-active':'day-badge'} rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center text-xs font-bold" id="day-badge-${i}">
+              ${d.day}
+            </div>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-semibold text-stone-800 text-sm">${d.title}</span>
+                ${countryFlag ? `<span class="text-sm">${countryFlag}</span>` : ''}
+              </div>
+              <div class="text-xs text-stone-500 mt-0.5">${pin ? pin.label : (d.pin || '')}</div>
+              <p class="text-xs text-stone-600 mt-1 leading-relaxed hidden" id="itin-desc-${i}">${d.desc||''}</p>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ---- Star rating ----
+  function buildStars(rating) {
+    return Array.from({length:5},(_,i) =>
+      `<span class="${i < Math.floor(rating) ? 'text-amber-400' : 'text-stone-200'} text-lg">★</span>`
+    ).join('');
+  }
+
+  // ---- Booking sidebar ----
+  function buildSidebar() {
+    const cc = tour.country || tour.countries?.[0];
+    const currency = tour.currency || 'ZAR';
+    return `
+      <div class="bg-white rounded-2xl shadow-xl border border-stone-100 overflow-hidden">
+        <div class="bg-primary/5 border-b border-primary/10 p-5">
+          <div class="text-xs text-stone-500 uppercase tracking-wide mb-1">Starting from</div>
+          <div class="text-3xl font-bold text-primary">${tour.startingFrom}</div>
+          <div class="text-stone-500 text-sm">${currency} per person</div>
+        </div>
+        <div class="p-5 space-y-3">
+          <div class="flex items-center justify-between text-sm border-b border-stone-100 pb-3">
+            <span class="text-stone-500">⏱ Duration</span>
+            <span class="font-semibold text-stone-800">${tour.duration}</span>
+          </div>
+          <div class="flex items-center justify-between text-sm border-b border-stone-100 pb-3">
+            <span class="text-stone-500">📅 Best time</span>
+            <span class="font-semibold text-stone-800">${tour.bestTime}</span>
+          </div>
+          <div class="flex items-center justify-between text-sm border-b border-stone-100 pb-3">
+            <span class="text-stone-500">👥 Group size</span>
+            <span class="font-semibold text-stone-800">${tour.groupSize}</span>
+          </div>
+          <div class="flex items-center gap-1 pb-1">
+            ${buildStars(tour.rating)}
+            <span class="text-stone-600 text-sm ml-1">${tour.rating} <span class="text-stone-400">(${tour.reviewCount} reviews)</span></span>
+          </div>
+        </div>
+        <div class="px-5 pb-5 space-y-3">
+          <a href="Contact.html?tour=${tour.id}" class="block w-full bg-primary text-white text-center py-3.5 rounded-xl font-bold hover:bg-primary/90 transition-all shadow-md text-sm">
+            Book This Tour
+          </a>
+          <a href="Contact.html" class="block w-full border-2 border-stone-200 text-stone-700 text-center py-3 rounded-xl font-semibold hover:border-primary hover:text-primary transition-all text-sm">
+            Request Custom Quote
+          </a>
+          <p class="text-xs text-stone-400 text-center">Free cancellation up to 30 days before departure</p>
+        </div>
+      </div>`;
+  }
+
+  // ---- MAP SECTION ----
+  function buildMapSection() {
+    const isMultiDay = tour.itinerary && tour.itinerary.length > 1;
+    if (!isMultiDay) return '';
+
+    const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+    const highlightCountries = tourType === 'multi'
+      ? tour.countries
+      : [tour.country];
+
+    return `
+      <div class="section-card bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden" id="map-section">
+        <div class="p-6 border-b border-stone-100">
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <div>
+              <h3 class="font-['Playfair_Display'] text-2xl font-bold text-stone-900">Route Map</h3>
+              <p class="text-stone-500 text-sm mt-0.5">Day-by-day animated journey — ${tour.totalDays||tour.itinerary.length} days, ${routePins.length} destinations</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="mapPrev()" class="w-9 h-9 rounded-full border border-stone-200 hover:bg-stone-100 flex items-center justify-center text-stone-500 transition-all">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button onclick="mapNext()" class="w-9 h-9 rounded-full border border-stone-200 hover:bg-stone-100 flex items-center justify-center text-stone-500 transition-all">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+              </button>
+              <button onclick="togglePlayMap()" id="play-map-btn"
+                class="px-4 h-9 rounded-full bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-all flex items-center gap-1.5">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                Play Route
+              </button>
+            </div>
+          </div>
+          <!-- Progress -->
+          <div class="mt-4 bg-stone-100 rounded-full h-1.5">
+            <div id="route-progress" class="bg-primary rounded-full h-1.5" style="width:${(1/routePins.length*100).toFixed(1)}%"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+          <!-- Map -->
+          <div class="lg:col-span-2 relative bg-stone-50" style="min-height:400px;">
+            <div id="tour-map-container" class="w-full h-full" style="min-height:400px;"></div>
+            <!-- Active location overlay -->
+            <div id="map-location-card" class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-stone-100 transition-all">
+              <div class="flex items-center gap-3">
+                <img id="map-day-img" src="${tour.itinerary[0].img||tour.heroImage}" alt="" class="w-14 h-11 rounded-lg object-cover flex-shrink-0">
+                <div class="min-w-0">
+                  <div class="text-xs font-bold text-primary">Day <span id="map-day-num">1</span> of ${tour.totalDays||tour.itinerary.length}</div>
+                  <div class="font-bold text-stone-800 text-sm truncate" id="map-day-loc">${TOUR_DATA.pins[tour.itinerary[0].pin]?.label||tour.itinerary[0].title}</div>
+                  <div class="text-xs text-stone-500 truncate" id="map-day-activity">${tour.itinerary[0].title}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day scroll list -->
+          <div class="border-t lg:border-t-0 lg:border-l border-stone-100">
+            <div id="itinerary-list" class="divide-y divide-stone-50 lg:max-h-[400px] overflow-y-auto">
+              ${buildItineraryList()}
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // ---- RENDER FULL PAGE ----
+  function renderPage() {
+    const countryFlag = tour.country ? TOUR_DATA.countries[tour.country]?.flag || '' : '';
+    const multiFlags = tour.countries ? tour.countries.map(c => TOUR_DATA.countries[c]?.flag||'').join(' ') : '';
+    const displayFlag = multiFlags || countryFlag;
+
+    document.getElementById('tour-content').innerHTML = `
+      <!-- Breadcrumb -->
+      <div class="bg-white border-b border-stone-100">
+        <div class="max-w-7xl mx-auto px-6 py-3 text-sm text-stone-500 flex items-center gap-1 flex-wrap">
+          ${buildBreadcrumb()}
+        </div>
+      </div>
+
+      <!-- HERO + PHOTOS -->
+      <section class="bg-white border-b border-stone-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+          <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <!-- Photos (left, 3 cols) -->
+            <div class="lg:col-span-3">
+              ${buildPhotos()}
+            </div>
+
+            <!-- Tour intro (right, 2 cols) -->
+            <div class="lg:col-span-2 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 mb-3 flex-wrap">
+                  ${displayFlag ? `<span class="text-2xl">${displayFlag}</span>` : ''}
+                  <span class="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                    ${tourType === 'multi' ? 'Multi-Country' : tourType === 'country' ? 'Country Route' : 'City Tour'}
+                  </span>
+                </div>
+                <h1 class="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-stone-900 leading-tight mb-2">${tour.name}</h1>
+                <p class="text-stone-500 text-base mb-4">${tour.tagline}</p>
+                <div class="flex items-center gap-1 mb-4">
+                  ${buildStars(tour.rating)}
+                  <span class="text-stone-600 text-sm ml-1 font-semibold">${tour.rating}</span>
+                  <span class="text-stone-400 text-sm">(${tour.reviewCount} reviews)</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                  <div class="bg-stone-50 rounded-xl p-3 text-center">
+                    <div class="text-xl mb-0.5">⏱</div>
+                    <div class="text-xs text-stone-500 uppercase font-semibold">Duration</div>
+                    <div class="font-bold text-stone-800 text-sm">${tour.duration}</div>
+                  </div>
+                  <div class="bg-stone-50 rounded-xl p-3 text-center">
+                    <div class="text-xl mb-0.5">📅</div>
+                    <div class="text-xs text-stone-500 uppercase font-semibold">Best Time</div>
+                    <div class="font-bold text-stone-800 text-sm">${tour.bestTime}</div>
+                  </div>
+                  <div class="bg-stone-50 rounded-xl p-3 text-center">
+                    <div class="text-xl mb-0.5">👥</div>
+                    <div class="text-xs text-stone-500 uppercase font-semibold">Group Size</div>
+                    <div class="font-bold text-stone-800 text-sm">${tour.groupSize}</div>
+                  </div>
+                  <div class="bg-primary/5 rounded-xl p-3 text-center border border-primary/20">
+                    <div class="text-xl mb-0.5">💰</div>
+                    <div class="text-xs text-stone-500 uppercase font-semibold">From</div>
+                    <div class="font-bold text-primary text-sm">${tour.startingFrom}</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Quick book buttons -->
+              <div class="space-y-2">
+                <a href="Contact.html?tour=${tour.id}" class="block w-full bg-primary text-white text-center py-3.5 rounded-xl font-bold hover:bg-primary/90 transition-all shadow-md">
+                  Book This Tour
+                </a>
+                <a href="Contact.html" class="block w-full border-2 border-stone-200 text-stone-700 text-center py-3 rounded-xl font-semibold hover:border-primary hover:text-primary transition-all text-sm">
+                  Request Custom Quote
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MAIN CONTENT -->
+      <section class="py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left column: details -->
+            <div class="lg:col-span-2 space-y-8">
+
+              <!-- Highlights -->
+              <div class="section-card bg-white rounded-2xl border border-stone-100 shadow-sm p-6">
+                <h3 class="font-['Playfair_Display'] text-2xl font-bold text-stone-900 mb-5">Tour Highlights</h3>
+                ${buildHighlights()}
+              </div>
+
+              <!-- Animated Route Map (only for multi-day tours) -->
+              ${buildMapSection()}
+
+              <!-- Full Itinerary Detail -->
+              ${(tour.itinerary||[]).length > 0 ? `
+              <div class="section-card bg-white rounded-2xl border border-stone-100 shadow-sm p-6">
+                <h3 class="font-['Playfair_Display'] text-2xl font-bold text-stone-900 mb-6">Day-by-Day Itinerary</h3>
+                <div class="space-y-5" id="full-itinerary">
+                  ${(tour.itinerary||[]).map((d, i) => {
+                    const pin = TOUR_DATA.pins[d.pin];
+                    const countryFlag = d.country ? TOUR_DATA.countries[d.country]?.flag || '' : '';
+                    return `
+                    <div class="flex gap-4 items-start group">
+                      <div class="flex flex-col items-center flex-shrink-0">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 border-2 border-primary/30 group-hover:bg-primary group-hover:border-primary group-hover:text-white text-primary font-bold text-sm flex items-center justify-center transition-all">${d.day}</div>
+                        ${i < (tour.itinerary.length-1) ? '<div class="w-0.5 h-full bg-stone-200 mt-1 flex-1 min-h-6"></div>' : ''}
+                      </div>
+                      <div class="flex-1 pb-6 min-w-0">
+                        <div class="flex items-start gap-2 flex-wrap mb-1">
+                          <h4 class="font-bold text-stone-800">${d.title}</h4>
+                          ${countryFlag ? `<span>${countryFlag}</span>` : ''}
+                          ${pin ? `<span class="text-xs bg-stone-100 text-stone-500 px-2 py-0.5 rounded-full">📍 ${pin.label}</span>` : ''}
+                        </div>
+                        <p class="text-stone-600 text-sm leading-relaxed">${d.desc||''}</p>
+                        ${d.img ? `<img src="${d.img}" alt="${d.title}" class="mt-3 rounded-xl w-full max-w-sm h-36 object-cover">` : ''}
+                      </div>
+                    </div>`;
+                  }).join('')}
+                </div>
+              </div>` : ''}
+
+              <!-- Included/Not Included -->
+              <div class="section-card bg-white rounded-2xl border border-stone-100 shadow-sm p-6">
+                <h3 class="font-['Playfair_Display'] text-2xl font-bold text-stone-900 mb-5">What's Included</h3>
+                ${buildIncludes()}
+              </div>
+            </div>
+
+            <!-- Right column: sticky booking sidebar -->
+            <div class="lg:col-span-1">
+              <div class="sticky-book">
+                ${buildSidebar()}
+                <!-- Country context -->
+                <div class="mt-4 bg-white rounded-2xl border border-stone-100 shadow-sm p-5">
+                  <p class="text-xs text-stone-400 uppercase font-semibold tracking-wide mb-3">Countries Visited</p>
+                  <div class="flex flex-wrap gap-2">
+                    ${(tour.countries || [tour.country]).filter(Boolean).map(cc => {
+                      const c = TOUR_DATA.countries[cc];
+                      return c ? `<a href="country.html?c=${cc}" class="flex items-center gap-1.5 bg-stone-50 hover:bg-primary/10 border border-stone-200 text-stone-700 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors">
+                        <span>${c.flag}</span> ${c.name}
+                      </a>` : '';
+                    }).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+
+    // Reveal content
+    document.getElementById('tour-content').classList.remove('opacity-0');
+
+    // Init map
+    if (tour.itinerary && tour.itinerary.length > 1) {
+      initTourMap();
+    }
+  }
+
+  // ---- MAP LOGIC ----
+  let tourMap = null;
+  let currentMapStep = 0;
+
+  async function initTourMap() {
+    const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+    const highlightCountries = tourType === 'multi' ? tour.countries : [tour.country];
+
+    tourMap = new PachaMap('tour-map-container', {
+      width: 700,
+      height: 420,
+      highlightCountries,
+      routePins,
+      showLabels: true,
+    });
+
+    await tourMap.render();
+
+    // Show step 0
+    updateMapDay(0);
+  }
+
+  function getItinForStep(stepIndex) {
+    const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+    const pin = routePins[stepIndex];
+    // Find first itinerary item matching this pin
+    const item = tour.itinerary.find(d => d.pin === pin);
+    const allForPin = tour.itinerary.filter(d => d.pin === pin);
+    return { pin, item, allForPin };
+  }
+
+  function updateMapDay(step) {
+    if (!tourMap) return;
+    const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+    tourMap.showStep(step);
+    currentMapStep = step;
+
+    const { item } = getItinForStep(step);
+    if (!item) return;
+
+    // Update overlay card
+    const pinData = TOUR_DATA.pins[item.pin];
+    document.getElementById('map-day-num').textContent = item.day;
+    document.getElementById('map-day-loc').textContent = pinData?.label || item.pin;
+    document.getElementById('map-day-activity').textContent = item.title;
+    if (item.img) document.getElementById('map-day-img').src = item.img;
+
+    // Update progress bar
+    const prog = document.getElementById('route-progress');
+    if (prog) prog.style.width = `${((step + 1) / routePins.length) * 100}%`;
+
+    // Highlight itinerary items matching this pin
+    tour.itinerary.forEach((d, i) => {
+      const el = document.getElementById(`itin-item-${i}`);
+      const badge = document.getElementById(`day-badge-${i}`);
+      const desc = document.getElementById(`itin-desc-${i}`);
+      const isActive = d.pin === item.pin;
+      if (el) {
+        el.classList.toggle('active', isActive);
+        el.classList.toggle('visited', !isActive && tour.itinerary.findIndex(x=>x.pin===routePins[step]) > i);
+      }
+      if (badge) badge.className = `day-badge rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center text-xs font-bold ${isActive ? 'day-badge-active' : 'day-badge'}`;
+      if (desc) desc.classList.toggle('hidden', !isActive);
+    });
+
+    // Scroll active item into view
+    const activeEl = document.querySelector('.itinerary-item.active');
+    if (activeEl) activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  window.selectDay = (i) => {
+    const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+    const pin = tour.itinerary[i].pin;
+    const stepIndex = routePins.indexOf(pin);
+    if (stepIndex >= 0) updateMapDay(stepIndex);
+  };
+
+  window.mapNext = () => {
+    const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+    if (currentMapStep < routePins.length - 1) updateMapDay(currentMapStep + 1);
+  };
+  window.mapPrev = () => {
+    if (currentMapStep > 0) updateMapDay(currentMapStep - 1);
+  };
+
+  let mapPlaying = false;
+  let mapInterval = null;
+  window.togglePlayMap = () => {
+    const btn = document.getElementById('play-map-btn');
+    if (mapPlaying) {
+      clearInterval(mapInterval);
+      mapPlaying = false;
+      if (btn) btn.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play Route`;
+    } else {
+      const routePins = [...new Set(tour.itinerary.map(d => d.pin))];
+      mapPlaying = true;
+      if (btn) btn.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Pause`;
+      updateMapDay(0);
+      let step = 0;
+      mapInterval = setInterval(() => {
+        step++;
+        if (step >= routePins.length) {
+          clearInterval(mapInterval);
+          mapPlaying = false;
+          if (btn) btn.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Play Again`;
+          return;
+        }
+        updateMapDay(step);
+      }, 900);
+    }
+  };
+
+  // ---- GO ----
+  renderPage();
+  </script>
+</body>
+</html>

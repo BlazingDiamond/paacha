@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country | Pacha Tours</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+  <link href="assets/common.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/common.js"></script>
+  <script src="assets/translations.js"></script>
+  <script src="assets/auth.js"></script>
+  <script src="assets/tour-data.js"></script>
+  <style>
+    .tour-card { transition: all 0.3s ease; }
+    .tour-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+    .tour-card:hover .tour-img { transform: scale(1.06); }
+    .tour-img { transition: transform 0.5s ease; }
+    .type-city { background:#eff6ff; color:#1d4ed8; }
+    .type-landmark { background:#f0fdf4; color:#15803d; }
+    .type-multi { background:#fffbeb; color:#b45309; }
+    .star-filled { color: #f59e0b; }
+    .breadcrumb a:hover { color: hsl(85 17% 48%); }
+  </style>
+</head>
+<body class="bg-white page-fade-in">
+  <div id="header-container"></div>
+  <main>
+    <!-- Hero (injected by JS) -->
+    <div id="hero-section"></div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-stone-50 border-b border-stone-200">
+      <div class="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 text-sm">
+        <a href="book-now.html" class="breadcrumb text-stone-500 transition-colors">Explore</a>
+        <span class="text-stone-300">/</span>
+        <span class="text-stone-800 font-semibold" id="breadcrumb-country">Country</span>
+      </div>
+    </div>
+
+    <!-- CITY TOURS SECTION -->
+    <section class="py-16 bg-white" id="cities-section">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-10">
+          <span class="text-primary text-xs font-bold uppercase tracking-widest">Cities & Landmarks</span>
+          <h2 class="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-stone-900 mt-1">Single Destination Tours</h2>
+          <p class="text-stone-500 mt-2">Deep dives into one city or landmark — from 2 to 7 days.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" id="city-tour-grid"></div>
+      </div>
+    </section>
+
+    <!-- MULTI-CITY TOURS SECTION -->
+    <section class="py-16 bg-stone-50" id="routes-section">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-10">
+          <span class="text-primary text-xs font-bold uppercase tracking-widest">Multi-Stop Routes</span>
+          <h2 class="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-stone-900 mt-1">Country Route Tours</h2>
+          <p class="text-stone-500 mt-2">Curated multi-city journeys connecting the best of this country.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="country-tour-grid"></div>
+        <div id="no-routes" class="hidden text-center py-10 text-stone-400">No multi-city routes available for this country yet. <a href="Contact.html" class="text-primary font-semibold">Request a custom itinerary →</a></div>
+      </div>
+    </section>
+
+    <!-- ALSO CONSIDER -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="font-['Playfair_Display'] text-3xl font-bold text-stone-800 mb-3">Also Consider</h2>
+        <p class="text-stone-500 mb-8">This country also features in multi-country tours — explore them below.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="also-consider-grid"></div>
+      </div>
+    </section>
+  </main>
+  <div id="footer-container"></div>
+
+  <script>
+  initPage('');
+
+  const params = new URLSearchParams(location.search);
+  const countryId = params.get('c') || 'ZA';
+  const country = TOUR_DATA.countries[countryId];
+  if (!country) { location.href = 'book-now.html'; }
+
+  document.title = `${country.name} Tours | Pacha Tours`;
+
+  // Hero
+  document.getElementById('hero-section').innerHTML = `
+    <section class="relative h-[55vh] overflow-hidden flex items-end">
+      <div class="absolute inset-0">
+        <img src="${country.heroImage}" alt="${country.name}" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-40 w-full">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-4xl">${country.flag}</span>
+          <span class="text-white/60 text-sm font-medium uppercase tracking-widest">${country.tagline}</span>
+        </div>
+        <h1 class="font-['Playfair_Display'] text-5xl md:text-6xl font-bold text-white leading-tight">${country.name}</h1>
+        <p class="text-white/75 mt-3 text-lg max-w-2xl">${country.description}</p>
+      </div>
+      <div class="absolute bottom-0 w-full h-20 pointer-events-none">
+        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="w-full h-full"><path d="M0,80 L0,40 Q600,0 1200,40 L1200,80 Z" fill="white"/></svg>
+      </div>
+    </section>`;
+
+  document.getElementById('breadcrumb-country').textContent = country.name;
+
+  const typeLabels = { city:'🏙 City', landmark:'🏞 Landmark', 'multi-city':'🗺 Route' };
+  const typeClass = { city:'type-city', landmark:'type-landmark', 'multi-city':'type-multi' };
+
+  function stars(rating) {
+    return Array.from({length:5},(_,i)=>`<span class="${i<Math.floor(rating)?'star-filled':'text-stone-300'}">★</span>`).join('');
+  }
+
+  // City tour cards
+  const cityTours = TOUR_DATA.cityTours.filter(t => t.country === countryId);
+  const cityGrid = document.getElementById('city-tour-grid');
+  if (cityTours.length === 0) {
+    cityGrid.innerHTML = '<p class="col-span-3 text-stone-400 text-center py-8">No city tours yet. <a href="Contact.html" class="text-primary font-semibold">Ask us to build one →</a></p>';
+  }
+  cityTours.forEach(tour => {
+    cityGrid.innerHTML += `
+      <a href="tour.html?id=${tour.id}&type=city" class="tour-card block rounded-2xl overflow-hidden shadow-md border border-stone-100 group bg-white">
+        <div class="h-52 overflow-hidden relative">
+          <img src="${tour.heroImage}" alt="${tour.name}" class="tour-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute top-3 left-3">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full ${typeClass[tour.type]}">${typeLabels[tour.type]}</span>
+          </div>
+          <div class="absolute bottom-3 left-4 right-4">
+            <div class="flex items-center gap-1 text-xs text-white/80 mb-1">
+              ${stars(tour.rating)} <span class="ml-1">${tour.rating} (${tour.reviewCount})</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-stone-900 text-lg mb-1">${tour.name}</h3>
+          <p class="text-stone-500 text-sm mb-4 leading-snug">${tour.tagline}</p>
+          <div class="flex items-center justify-between pt-3 border-t border-stone-100">
+            <div class="text-xs text-stone-400">⏱ ${tour.duration} &nbsp;·&nbsp; 📅 Best: ${tour.bestTime}</div>
+            <div class="text-primary font-bold text-sm">${tour.startingFrom}</div>
+          </div>
+        </div>
+      </a>`;
+  });
+
+  // Multi-city country tour cards
+  const countryTours = TOUR_DATA.countryTours.filter(t => t.country === countryId);
+  const routeGrid = document.getElementById('country-tour-grid');
+  if (countryTours.length === 0) {
+    document.getElementById('no-routes').classList.remove('hidden');
+    routeGrid.classList.add('hidden');
+  }
+  countryTours.forEach(tour => {
+    const stopPins = [...new Set(tour.itinerary.map(d=>d.pin))];
+    const stopLabels = stopPins.map(p => TOUR_DATA.pins[p]?.label || p).filter(Boolean);
+    routeGrid.innerHTML += `
+      <a href="tour.html?id=${tour.id}&type=country" class="tour-card block rounded-2xl overflow-hidden shadow-md border border-stone-100 group bg-white">
+        <div class="h-56 overflow-hidden relative">
+          <img src="${tour.heroImage}" alt="${tour.name}" class="tour-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute top-3 left-3">
+            <span class="text-xs font-bold px-2.5 py-1 rounded-full type-multi">🗺 Multi-Stop Route</span>
+          </div>
+          <div class="absolute bottom-3 left-4 right-14">
+            <div class="flex items-center gap-1 text-xs text-white/80 mb-1">
+              ${stars(tour.rating)} <span class="ml-1">${tour.rating} (${tour.reviewCount})</span>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-4 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-full">${tour.totalDays}d</div>
+        </div>
+        <div class="p-5">
+          <h3 class="font-bold text-stone-900 text-lg mb-1">${tour.name}</h3>
+          <!-- Route stops -->
+          <div class="flex items-center gap-1 flex-wrap text-xs text-stone-500 mb-3">
+            ${stopLabels.slice(0,5).map((l,i)=>`${i>0?'<span class="text-stone-300 mx-0.5">→</span>':''}<span class="font-medium text-stone-600">${l}</span>`).join('')}
+            ${stopLabels.length>5?`<span class="text-stone-400">+${stopLabels.length-5} more</span>`:''}
+          </div>
+          <div class="flex flex-wrap gap-2 mb-4">
+            ${tour.highlights.slice(0,3).map(h=>`<span class="bg-stone-50 text-stone-600 text-xs px-2 py-1 rounded-full">${h.icon} ${h.text.slice(0,30)}</span>`).join('')}
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-stone-100">
+            <div class="text-xs text-stone-400">📅 Best: ${tour.bestTime}</div>
+            <div class="text-primary font-bold">${tour.startingFrom}</div>
+          </div>
+        </div>
+      </a>`;
+  });
+
+  // Also consider: multi-country tours that include this country
+  const multiCountry = TOUR_DATA.multiCountryTours.filter(t => t.countries.includes(countryId));
+  const alsoGrid = document.getElementById('also-consider-grid');
+  if (multiCountry.length === 0) {
+    alsoGrid.parentElement.parentElement.classList.add('hidden');
+  }
+  multiCountry.forEach(t => {
+    const flags = t.countries.map(c=>TOUR_DATA.countries[c]?.flag||'').join(' ');
+    alsoGrid.innerHTML += `
+      <a href="tour.html?id=${t.id}&type=multi" class="tour-card block rounded-2xl overflow-hidden shadow-md border border-stone-100">
+        <div class="h-40 overflow-hidden relative">
+          <img src="${t.heroImage}" alt="${t.name}" class="tour-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-3 left-4"><div class="text-lg">${flags}</div></div>
+        </div>
+        <div class="p-4 bg-white">
+          <h3 class="font-bold text-stone-900 mb-1">${t.name}</h3>
+          <p class="text-stone-500 text-xs mb-2">${t.tagline}</p>
+          <span class="text-primary font-bold text-sm">${t.startingFrom} ZAR pp</span>
+        </div>
+      </a>`;
+  });
+  </script>
+</body>
+</html>

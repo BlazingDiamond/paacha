@@ -71,6 +71,66 @@ const translations = {
 			terms: 'Terms of Service',
 			privacy: 'Privacy Policy',
 			copyright: '© 2026 Pacha Tours and Travel. All rights reserved.'
+		},
+		about: {
+			hero: {
+				badge: 'About Us',
+				title: 'Your Gateway to Tours and Travel'
+			},
+			intro: {
+				title: 'Born in Africa, Built on Passion',
+				body: 'Your gateway to exploring the vibrant tapestry of Southern Africa. With years of collective experience in the tourism industry, our dedicated team of seasoned tour consultants and adventure enthusiasts is excited to introduce you to a new chapter in travel excellence.'
+			},
+			cta: {
+				title: 'Start Your Journey Today',
+				description: 'Your unforgettable journey starts here. Let us craft your perfect adventure.',
+				button: 'Get Free Quote'
+			}
+		},
+		tours: {
+			hero: {
+				badge: 'Tours',
+				title: 'Discover Southern Africa<br>One Tour at a Time'
+			},
+			intro: {
+				title: 'Choose Your Next Adventure',
+				description: 'From iconic Southern African landscapes to hidden gems, each tour is designed to give you an unforgettable journey. Browse our most popular packages below — or let us create one just for you.'
+			},
+			buttons: {
+				bookGroup: 'Book a Group Tour'
+			},
+			customCta: {
+				title: 'Didn’t Find the Perfect Tour? Let’s Create It Together.',
+				description: 'Your dream adventure doesn’t have to fit into a pre-set itinerary. Whether you’re chasing rare wildlife sightings, craving a private wine tour, or dreaming of a journey that blends beaches, mountains, and culture — we’ll make it happen.',
+				button: 'Plan My Custom Tour'
+			},
+			cta: {
+				title: 'Ready to Embark on Your Adventure?',
+				description: 'Choose from our curated selection of tours and create memories that will last a lifetime.',
+				button: 'Book Your Tour'
+			}
+		},
+		book: {
+			hero: {
+				badge: 'Start Your Adventure',
+				title: 'Book Your Dream<br>African Journey'
+			}
+		},
+		blog: {
+			hero: {
+				title: 'Stories from the Road',
+				subtitle: 'Travel inspiration, tips, and tales from across Southern Africa'
+			},
+			latest: {
+				title: 'Latest Stories',
+				subtitle: 'Travel tips, destination guides, and adventure tales'
+			},
+			newsletter: {
+				title: 'Never Miss an Adventure',
+				description: 'Subscribe to our newsletter for travel tips, destination guides, and exclusive deals.',
+				placeholder: 'Your email address',
+				button: 'Subscribe'
+			}
 		}
 	},
 	fr: {
@@ -144,6 +204,66 @@ const translations = {
 			terms: 'Conditions d\'Utilisation',
 			privacy: 'Politique de Confidentialité',
 			copyright: '© 2026 Pacha Tours and Travel. Tous droits réservés.'
+		},
+		about: {
+			hero: {
+				badge: 'À Propos',
+				title: 'Votre Passerelle vers les Circuits et Voyages'
+			},
+			intro: {
+				title: 'Née en Afrique, Portée par la Passion',
+				body: 'Votre porte d’entrée vers la découverte de la riche mosaïque de l’Afrique australe. Forte de nombreuses années d’expérience dans le tourisme, notre équipe de conseillers et passionnés d’aventure est prête à vous faire vivre une nouvelle ère de voyages d’exception.'
+			},
+			cta: {
+				title: 'Commencez Votre Voyage Aujourd\'hui',
+				description: 'Votre voyage inoubliable commence ici. Laissez-nous créer votre aventure parfaite.',
+				button: 'Obtenir Un Devis Gratuit'
+			}
+		},
+		tours: {
+			hero: {
+				badge: 'Circuits',
+				title: 'Découvrez l\'Afrique Australe<br>Un Circuit à la Fois'
+			},
+			intro: {
+				title: 'Choisissez Votre Prochaine Aventure',
+				description: 'Des paysages emblématiques d’Afrique australe aux trésors cachés, chaque circuit est conçu pour vous offrir un voyage inoubliable. Parcourez nos offres les plus populaires — ou laissez-nous créer un itinéraire sur mesure.'
+			},
+			buttons: {
+				bookGroup: 'Réserver un Circuit en Groupe'
+			},
+			customCta: {
+				title: 'Vous N\'avez Pas Trouvé le Circuit Idéal ? Créons-le Ensemble.',
+				description: 'Votre aventure de rêve n’a pas besoin de rentrer dans un itinéraire prédéfini. Que vous recherchiez des rencontres animalières rares, une visite privée des vignobles ou un voyage mêlant plages, montagnes et culture — nous le réaliserons.',
+				button: 'Créer Mon Circuit Sur Mesure'
+			},
+			cta: {
+				title: 'Prêt à Partir à l\'Aventure ?',
+				description: 'Choisissez parmi notre sélection de circuits et créez des souvenirs qui dureront toute une vie.',
+				button: 'Réserver Votre Circuit'
+			}
+		},
+		book: {
+			hero: {
+				badge: 'Commencez Votre Aventure',
+				title: 'Réservez Votre Voyage<br>de Rêve en Afrique'
+			}
+		},
+		blog: {
+			hero: {
+				title: 'Histoires de la Route',
+				subtitle: 'Inspiration voyage, conseils et récits à travers l\'Afrique australe'
+			},
+			latest: {
+				title: 'Derniers Articles',
+				subtitle: 'Conseils de voyage, guides de destinations et récits d’aventure'
+			},
+			newsletter: {
+				title: 'Ne Manquez Aucune Aventure',
+				description: 'Abonnez-vous à notre newsletter pour recevoir conseils, guides de destinations et offres exclusives.',
+				placeholder: 'Votre adresse e-mail',
+				button: 'S\'abonner'
+			}
 		}
 	}
 };

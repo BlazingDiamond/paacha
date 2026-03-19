@@ -13,11 +13,11 @@
 	<script src="assets/translations.js"></script>
 </head>
 
-<body class="bg-white">
+<body class="bg-white page-fade-in">
 	<div id="header-container"></div>
 
 	<main>
-		<section class="relative pt-32 pb-48 overflow-hidden min-h-[85vh] flex items-center">
+		<section class="relative pt-32 pb-48 overflow-hidden min-h-[85vh] flex items-center fade-in-up">
 			<div class="absolute inset-0 bg-cover bg-center z-0"
 				 style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop');">
 				<div class="absolute inset-0 bg-black/45"></div>
@@ -45,7 +45,7 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-white">
+		<section class="py-16 md:py-24 bg-white fade-in-up">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 				<div>
@@ -72,7 +72,7 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-[#3E3B30;] text-white">
+		<section class="py-16 md:py-24 bg-[#3E3B30;] text-white fade-in-up">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 				<div class="text-center group">
@@ -106,7 +106,7 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-white">
+		<section class="py-16 md:py-24 bg-white fade-in-up">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-12">
 				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="home.gallery.title">Moments That Stay With You</h2>
@@ -133,7 +133,7 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-gray-50">
+		<section class="py-16 md:py-24 bg-gray-50 fade-in-up">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="text-center mb-12">
 				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="home.testimonials.title">Real Stories from Real Adventures</h2>
@@ -163,14 +163,35 @@
 							to detail made the journey unforgettable."</p>
 						<div>
 							<p class="font-semibold text-gray-900">Alex M</p>
-							<p class="text-primary text-xs font-bold uppercase">England</p>
+							<p class="text-primary text-xs font-bold uppercase">United Kingdom</p>
+						</div>
+					</div>
+					<div class="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition">
+						<p class="text-gray-700 text-sm leading-relaxed mb-4 italic">"Even though I’m from Africa, traveling with Pacha Tours gave me a whole new appreciation for the region. I explored the Garden Route and the Cape Winelands, experiences I might not have discovered on my own. Their team’s attention to detail and hospitality made it feel like traveling with family.."</p>
+						<div>
+							<p class="font-semibold text-gray-900">Daniel K.</p>
+							<p class="text-primary text-xs font-bold uppercase">Kenya</p>
+						</div>
+					</div>
+					<div class="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition">
+						<p class="text-gray-700 text-sm leading-relaxed mb-4 italic">"We wanted a family holiday that combined relaxation with adventure. Pacha Tours curated the perfect itinerary, from whale watching in Hermanus to a child-friendly safari experience. Everything was handled so professionally, and my kids still talk about seeing elephants up close. Thank you for making our dream trip a reality!"</p>
+						<div>
+							<p class="font-semibold text-gray-900">Chinwe A.</p>
+							<p class="text-primary text-xs font-bold uppercase">Nigeria</p>
+						</div>
+					</div>
+					<div class="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm hover:shadow-md transition">
+						<p class="text-gray-700 text-sm leading-relaxed mb-4 italic">"Our family trip with Pacha Tours was truly unforgettable. From the moment we arrived in Johannesburg to our safari in Kruger, every detail was well-organized. The guides were knowledgeable, the accommodations comfortable, and the wildlife encounters beyond anything we imagined. It was the perfect mix of adventure and relaxation."</p>
+						<div>
+							<p class="font-semibold text-gray-900">Michael & Sarah</p>
+							<p class="text-primary text-xs font-bold uppercase">USA</p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-	<section class="py-16 md:py-24 bg-white">
+	<section class="py-16 md:py-24 bg-white fade-in-up">
 		<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<div id="proverb-container" class="proverb-container">
 				<h2 id="proverb-title" class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
@@ -214,10 +235,13 @@
 		
 		// Insert CTA section
 		insertCTA('cta-section', {
+			title: 'Start Your Journey Today',
+			description: 'Your unforgettable journey starts here. Let us craft your perfect adventure.',
+			buttonText: 'Get Free Quote',
+			buttonLink: 'book-now.html',
 			titleKey: 'home.cta.title',
 			descriptionKey: 'home.cta.description',
-			buttonTextKey: 'home.cta.button',
-			buttonLink: 'book-now.html'
+			buttonTextKey: 'home.cta.button'
 		});
 
 		// Proverb Carousel
@@ -306,6 +330,26 @@
 		// Initialize dots and content
 		updateDots();
 		updateProverbContent();
+
+		// Scroll-in animation for sections
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{
+				threshold: 0.15
+			}
+		);
+
+		document.querySelectorAll('.fade-in-up').forEach((section, index) => {
+			section.classList.add(`delay-${Math.min(index, 3)}`);
+			observer.observe(section);
+		});
 	</script>
 </body>
 
