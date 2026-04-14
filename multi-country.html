@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Multi-Country Tours | Pacha Tours</title>
+  <title>Explore Southern Africa | Pacha Tours</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
   <link href="assets/common.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -10,77 +10,62 @@
   <script src="assets/translations.js"></script>
   <script src="assets/auth.js"></script>
   <script src="assets/tour-data.js"></script>
-  <script src="assets/map-component.js"></script>
   <style>
-    .tour-row:hover { background: #f8f7f4; }
-    .tour-row { transition: background 0.2s ease; }
-    .tour-row:hover .row-arrow { transform: translateX(4px); }
-    .row-arrow { transition: transform 0.2s ease; }
-    .flag-row { letter-spacing: 2px; }
-    .mini-map-container { min-height: 180px; }
+    .country-card { transition: all 0.35s cubic-bezier(0.34,1.3,0.64,1); }
+    .country-card:hover { transform: translateY(-8px); }
+    .country-card:hover .card-img { transform: scale(1.07); }
+    .card-img { transition: transform 0.6s ease; }
+    .multi-card:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.2); }
+    .multi-card { transition: all 0.3s ease; }
   </style>
 </head>
 <body class="bg-white page-fade-in">
   <div id="header-container"></div>
   <main>
     <!-- Hero -->
-    <section class="relative h-[50vh] overflow-hidden flex items-end">
+    <section class="relative min-h-[65vh] flex items-end overflow-hidden">
       <div class="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&h=800&fit=crop" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-stone-900/40 to-transparent"></div>
+        <img src="https://images.unsplash.com/photo-1484542603127-984f4f7d14cb?w=1600&h=900&fit=crop" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/85"></div>
       </div>
-      <div class="relative z-10 max-w-7xl mx-auto px-6 pb-16 pt-40 w-full">
-        <a href="book-now.html" class="inline-flex items-center gap-1 text-white/60 hover:text-white text-sm mb-4 transition-colors">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          All Destinations
-        </a>
-        <h1 class="font-['Playfair_Display'] text-5xl md:text-6xl font-bold text-white leading-tight" style="text-shadow:0 2px 20px rgba(0,0,0,0.5)">
-          Multi-Country<br><em>Tours</em>
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 pt-44">
+        <p class="text-primary/90 uppercase tracking-[0.3em] text-xs font-bold mb-4 bg-white/10 backdrop-blur-sm inline-block px-3 py-1 rounded-full">Where would you like to go?</p>
+        <h1 class="font-['Playfair_Display'] text-5xl md:text-7xl text-white font-bold leading-[1.05] mb-5 max-w-3xl" style="text-shadow:0 2px 30px rgba(0,0,0,0.5)">
+          Explore<br><em>Southern Africa</em>
         </h1>
-        <p class="text-white/70 mt-3 text-lg max-w-xl">Epic journeys spanning multiple nations — with animated day-by-day route maps showing exactly where you'll go each day.</p>
+        <p class="text-white/75 text-lg max-w-xl leading-relaxed">Select a country to browse cities, wildlife landmarks, multi-stop routes, and grand cross-border adventures.</p>
       </div>
-      <div class="absolute bottom-0 w-full h-20 pointer-events-none">
-        <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="w-full h-full"><path d="M0,80 L0,40 Q600,0 1200,40 L1200,80 Z" fill="white"/></svg>
+      <div class="absolute bottom-0 w-full h-28 z-10 pointer-events-none">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-full"><path d="M0,120 L0,60 Q300,0 600,60 T1200,60 L1200,120 Z" fill="white"/></svg>
       </div>
     </section>
 
-    <!-- Region overview map -->
-    <section class="py-12 bg-white border-b border-stone-100">
+    <!-- COUNTRIES -->
+    <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <span class="text-primary text-xs font-bold uppercase tracking-widest">The Region</span>
-            <h2 class="font-['Playfair_Display'] text-3xl font-bold text-stone-900 mt-1 mb-3">Southern Africa at a Glance</h2>
-            <p class="text-stone-600 leading-relaxed mb-5">Our multi-country tours cross through six extraordinary nations — each offering its own distinct wildlife, culture, and landscapes.</p>
-            <div class="grid grid-cols-2 gap-3">
-              ${Object.entries(TOUR_DATA.countries).map(([id,c]) => `
-                <a href="country.html?c=${id}" class="flex items-center gap-2 bg-stone-50 hover:bg-primary/5 border border-stone-200 hover:border-primary/30 rounded-xl px-3 py-2 text-sm font-medium text-stone-700 transition-all">
-                  <span class="text-lg">${c.flag}</span> ${c.name}
-                </a>`).join('')}
-            </div>
-          </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg border border-stone-200" style="height:380px;">
-            <div id="region-map" class="w-full h-full"></div>
-          </div>
+        <div class="text-center mb-14">
+          <span class="text-primary text-xs font-bold uppercase tracking-widest">Step 1</span>
+          <h2 class="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-stone-900 mt-1 mb-3">Choose a Country</h2>
+          <p class="text-stone-500 text-lg max-w-lg mx-auto">Then explore cities, landmarks, and curated routes within it.</p>
         </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="country-grid"></div>
       </div>
     </section>
 
-    <!-- Tour Cards -->
-    <section class="py-16 bg-stone-50">
+    <!-- MULTI-COUNTRY TEASER -->
+    <section class="py-20 bg-stone-900">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="space-y-10" id="tours-list"></div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-16 bg-stone-900 text-white text-center">
-      <div class="max-w-2xl mx-auto px-6">
-        <h2 class="font-['Playfair_Display'] text-4xl font-bold mb-4">Can't Find Your Perfect Route?</h2>
-        <p class="text-stone-400 mb-8 text-lg">Tell us your dream countries and travel style — we'll design a custom multi-country itinerary just for you.</p>
-        <a href="Contact.html" class="inline-block bg-primary hover:bg-primary/90 text-white px-10 py-4 rounded-full font-bold transition-all shadow-xl">
-          Design My Custom Tour
-        </a>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div>
+            <span class="text-primary text-xs font-bold uppercase tracking-widest">Crossing Borders</span>
+            <h2 class="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-white mt-1">Multi-Country Tours</h2>
+            <p class="text-stone-400 mt-2 text-base max-w-md">Epic journeys spanning multiple nations — each with an animated day-by-day route map.</p>
+          </div>
+          <a href="multi-country.html" class="inline-flex items-center gap-2 border-2 border-primary/60 hover:border-primary text-primary px-7 py-3 rounded-full font-semibold text-sm transition-all whitespace-nowrap">
+            See all tours <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="multi-tour-grid"></div>
       </div>
     </section>
   </main>
@@ -89,107 +74,70 @@
   <script>
   initPage('');
 
-  // Region overview map (all countries highlighted)
-  async function initRegionMap() {
-    const map = new PachaMap('region-map', {
-      width: 600,
-      height: 380,
-      highlightCountries: Object.keys(TOUR_DATA.countries),
-      showLabels: true,
-    });
-    await map.render();
+  const countryImgs = {
+    ZA:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&h=460&fit=crop',
+    ZW:'./images/simbabwe-laenderinformationen-afrika-naturkurs-guideausbildung-landschaft-sabbatjahr-natucate.webp',
+    MZ:'https://images.unsplash.com/photo-1501236570563-a5f23de3ee82?w=700&h=460&fit=crop',
+    ZM:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=700&h=460&fit=crop',
+    SZ:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&h=460&fit=crop',
+    LS:'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=700&h=460&fit=crop',
+  };
+
+  function getTourStats(id) {
+    const city = TOUR_DATA.cityTours.filter(t=>t.country===id).length;
+    const multi = TOUR_DATA.countryTours.filter(t=>t.country===id).length;
+    return { city, multi };
   }
-  initRegionMap();
 
-  // Tour cards
-  const toursList = document.getElementById('tours-list');
-
-  TOUR_DATA.multiCountryTours.forEach((tour, ti) => {
-    const flags = tour.countries.map(c => TOUR_DATA.countries[c]?.flag||'').join(' ');
-    const routePins = [...new Set(tour.itinerary.map(d=>d.pin))];
-    const mapContainerId = `multi-map-${ti}`;
-
-    toursList.innerHTML += `
-      <div class="bg-white rounded-3xl shadow-lg overflow-hidden border border-stone-100">
-        <!-- Tour header -->
+  const grid = document.getElementById('country-grid');
+  Object.entries(TOUR_DATA.countries).forEach(([id, c], i) => {
+    const { city, multi } = getTourStats(id);
+    const totalTours = city + multi;
+    grid.innerHTML += `
+      <a href="country.html?c=${id}" class="country-card block rounded-3xl overflow-hidden shadow-md group border border-stone-100">
         <div class="relative h-64 overflow-hidden">
-          <img src="${tour.heroImage}" alt="${tour.name}" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-r from-black/75 to-black/20"></div>
-          <div class="absolute inset-0 flex flex-col justify-end p-7">
-            <div class="flex flex-wrap gap-2 mb-2">
-              ${tour.countries.map(cc => {
-                const c = TOUR_DATA.countries[cc];
-                return `<a href="country.html?c=${cc}" class="text-xs bg-white/15 hover:bg-white/25 backdrop-blur-sm text-white px-3 py-1 rounded-full font-semibold transition-all">${c?.flag||''} ${c?.name||cc}</a>`;
-              }).join('')}
-            </div>
-            <h2 class="font-['Playfair_Display'] text-3xl font-bold text-white">${tour.name}</h2>
-            <p class="text-white/75 mt-1">${tour.tagline}</p>
-          </div>
-          <div class="absolute top-5 right-5 bg-primary text-white px-4 py-2 rounded-full font-bold shadow-lg">
-            ${tour.startingFrom} <span class="font-normal text-white/80 text-sm">${tour.currency||'ZAR'}</span>
+          <img src="${countryImgs[id]||c.heroImage}" alt="${c.name}" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"></div>
+          <div class="absolute top-3 left-3 text-3xl">${c.flag}</div>
+          ${totalTours>0?`<div class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-full">${totalTours} tour${totalTours>1?'s':''}</div>`:''}
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="text-white font-['Playfair_Display'] text-2xl font-bold leading-tight">${c.name}</h3>
+            <p class="text-white/75 text-sm mt-0.5">${c.tagline}</p>
           </div>
         </div>
-
-        <!-- Body -->
-        <div class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <!-- Left: details + itinerary preview -->
-          <div>
-            <div class="flex items-center gap-4 mb-5 text-sm text-stone-500 flex-wrap">
-              <span class="bg-stone-100 px-3 py-1 rounded-full font-semibold">⏱ ${tour.duration}</span>
-              <span class="bg-stone-100 px-3 py-1 rounded-full font-semibold">📅 Best: ${tour.bestTime}</span>
-              <span class="bg-stone-100 px-3 py-1 rounded-full font-semibold">👥 ${tour.groupSize}</span>
-            </div>
-            <h4 class="font-bold text-stone-800 mb-3">Highlights</h4>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
-              ${tour.highlights.slice(0,4).map(h=>`
-                <div class="flex items-start gap-2 text-sm text-stone-600">
-                  <span class="text-lg">${h.icon}</span> ${h.text}
-                </div>`).join('')}
-            </div>
-            <h4 class="font-bold text-stone-800 mb-2">Route Overview</h4>
-            <div class="flex flex-wrap gap-1 mb-5">
-              ${routePins.map((p,i) => {
-                const pin = TOUR_DATA.pins[p];
-                return `${i>0?'<span class="text-stone-300 self-center text-sm">→</span>':''}
-                  <span class="text-xs bg-stone-50 border border-stone-200 text-stone-600 px-2 py-0.5 rounded-full font-medium">${pin?.label||p}</span>`;
-              }).join('')}
-            </div>
-            <div class="flex gap-3">
-              <a href="tour.html?id=${tour.id}&type=multi" class="flex-1 bg-primary text-white text-center py-3 rounded-xl font-bold text-sm hover:bg-primary/90 transition-all shadow-md">
-                View Full Tour
-              </a>
-              <a href="Contact.html" class="flex-1 border-2 border-stone-200 text-stone-700 text-center py-3 rounded-xl font-semibold text-sm hover:border-primary hover:text-primary transition-all">
-                Get Quote
-              </a>
-            </div>
+        <div class="bg-white px-5 py-4 flex items-center justify-between gap-3">
+          <div class="flex gap-2 flex-wrap">
+            ${city>0?`<span class="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">${city} cit${city>1?'ies':'y'}</span>`:''}
+            ${multi>0?`<span class="bg-primary/10 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">${multi} route${multi>1?'s':''}</span>`:''}
           </div>
-
-          <!-- Right: map -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-bold text-stone-700">Route Map</span>
-              <a href="tour.html?id=${tour.id}&type=multi" class="text-xs text-primary font-semibold hover:underline">Animate full route →</a>
-            </div>
-            <div id="${mapContainerId}" class="mini-map-container w-full rounded-2xl overflow-hidden border border-stone-200 shadow-sm" style="height:220px;"></div>
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-stone-100 group-hover:bg-primary flex items-center justify-center transition-all">
+            <svg class="text-stone-500 group-hover:text-white transition-colors" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </div>
         </div>
-      </div>`;
+      </a>`;
+  });
 
-    // Render mini map after DOM insert
-    setTimeout(async () => {
-      const map = new PachaMap(mapContainerId, {
-        width: 500,
-        height: 220,
-        highlightCountries: tour.countries,
-        routePins,
-        showLabels: false,
-      });
-      await map.render();
-      // Show all steps (full static route)
-      if (map._routePinCoords) {
-        map.showStep(map._routePinCoords.length - 1);
-      }
-    }, 100 * (ti + 1));
+  const multiGrid = document.getElementById('multi-tour-grid');
+  TOUR_DATA.multiCountryTours.forEach(t => {
+    const flags = t.countries.map(c=>TOUR_DATA.countries[c]?.flag||'').join(' ');
+    multiGrid.innerHTML += `
+      <a href="tour.html?id=${t.id}&type=multi" class="multi-card block rounded-2xl overflow-hidden bg-stone-800 border border-stone-700">
+        <div class="h-44 overflow-hidden relative">
+          <img src="${t.heroImage}" alt="${t.name}" class="w-full h-full object-cover opacity-60 hover:opacity-80 transition-opacity">
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/30 to-transparent"></div>
+          <div class="absolute bottom-3 left-4 right-4">
+            <div class="text-lg mb-1">${flags}</div>
+            <h3 class="text-white font-bold text-base leading-snug">${t.name}</h3>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-stone-400 text-xs mb-3">${t.tagline}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-primary font-bold text-sm">${t.startingFrom} <span class="text-stone-500 font-normal">${t.currency==='USD'?'USD':'USD'}/pp</span></span>
+            <span class="text-stone-500 text-xs">${t.duration}</span>
+          </div>
+        </div>
+      </a>`;
   });
   </script>
 </body>
