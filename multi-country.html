@@ -74,15 +74,6 @@
   <script>
   initPage('');
 
-  const countryImgs = {
-    ZA:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=700&h=460&fit=crop',
-    ZW:'./images/simbabwe-laenderinformationen-afrika-naturkurs-guideausbildung-landschaft-sabbatjahr-natucate.webp',
-    MZ:'https://images.unsplash.com/photo-1501236570563-a5f23de3ee82?w=700&h=460&fit=crop',
-    ZM:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=700&h=460&fit=crop',
-    SZ:'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=700&h=460&fit=crop',
-    LS:'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=700&h=460&fit=crop',
-  };
-
   function getTourStats(id) {
     const city = TOUR_DATA.cityTours.filter(t=>t.country===id).length;
     const multi = TOUR_DATA.countryTours.filter(t=>t.country===id).length;
@@ -96,7 +87,7 @@
     grid.innerHTML += `
       <a href="country.html?c=${id}" class="country-card block rounded-3xl overflow-hidden shadow-md group border border-stone-100">
         <div class="relative h-64 overflow-hidden">
-          <img src="${countryImgs[id]||c.heroImage}" alt="${c.name}" class="card-img w-full h-full object-cover">
+          <img src="${c.cardImage||c.heroImage}" alt="${c.name}" class="card-img w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"></div>
           <div class="absolute top-3 left-3 text-3xl">${c.flag}</div>
           ${totalTours>0?`<div class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-full">${totalTours} tour${totalTours>1?'s':''}</div>`:''}

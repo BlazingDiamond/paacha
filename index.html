@@ -11,6 +11,31 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="assets/common.js"></script>
 	<script src="assets/translations.js"></script>
+	<style>
+		.bg-slideshow {
+			position: absolute;
+			inset: 0;
+			overflow: hidden;
+		}
+		.bg-slideshow .slide {
+			position: absolute;
+			inset: 0;
+			background-size: cover;
+			background-position: center;
+			opacity: 0;
+			transform: scale(1);
+			transition: opacity 1.2s ease;
+			animation: slowZoom 14s ease-in-out forwards;
+			will-change: transform, opacity;
+		}
+		.bg-slideshow .slide.active {
+			opacity: 1;
+		}
+		@keyframes slowZoom {
+			from { transform: scale(1); }
+			to { transform: scale(1.09); }
+		}
+	</style>
 </head>
 
 <body class="bg-white page-fade-in">
@@ -18,8 +43,7 @@
 
 	<main>
 		<section class="relative pt-32 pb-48 overflow-hidden min-h-[85vh] flex items-center fade-in-up">
-			<div class="absolute inset-0 bg-cover bg-center z-0"
-				 style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200&h=600&fit=crop');">
+			<div id="hero-slideshow" class="bg-slideshow z-0">
 				<div class="absolute inset-0 bg-black/45"></div>
 			</div>
 		
@@ -45,7 +69,7 @@
 			</div>
 		</section>
 
-		<section class="py-16 md:py-24 bg-white fade-in-up">
+		<section class="py-16 md:py-12 bg-white fade-in-up">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 				<div>
@@ -243,6 +267,50 @@
 			descriptionKey: 'home.cta.description',
 			buttonTextKey: 'home.cta.button'
 		});
+
+		function initBackgroundSlideshow(containerId, images, intervalMs = 5000) {
+			const container = document.getElementById(containerId);
+			if (!container || !images || images.length === 0) return;
+
+			container.querySelectorAll('.slide').forEach((el) => el.remove());
+
+			const slides = images.map((img, index) => {
+				const slide = document.createElement('div');
+				slide.className = `slide${index === 0 ? ' active' : ''}`;
+				slide.style.backgroundImage = `url('${img}')`;
+				container.prepend(slide);
+				return slide;
+			});
+
+			let active = 0;
+			setInterval(() => {
+				slides[active].classList.remove('active');
+				active = (active + 1) % slides.length;
+				slides[active].style.animation = 'none';
+				slides[active].offsetHeight;
+				slides[active].style.animation = '';
+				slides[active].classList.add('active');
+			}, intervalMs);
+		}
+
+		initBackgroundSlideshow('hero-slideshow', [
+			'./images/Suedafrika_Header.jpg',
+			'./images/Johannesburg-Skyline.jpg',
+			'./images/simbabwe-laenderinformationen-afrika-naturkurs-guideausbildung-landschaft-sabbatjahr-natucate.webp',
+			'./images/01-mozambique-best-secret-beaches-1 (1).jpg'
+		], 5200);
+
+		const ctaBg = document.querySelector('#cta-section .absolute.inset-0.bg-cover.bg-center');
+		if (ctaBg) {
+			ctaBg.id = 'cta-slideshow';
+			ctaBg.classList.add('bg-slideshow');
+			initBackgroundSlideshow('cta-slideshow', [
+				'./images/iStock-2066510109-HEADERMOBILE_(1).webp',
+				'./images/machaba-botswana-okavango-delta-boat-safari-elephants-1024x576.jpg',
+				'./images/IMG_1615-min-scaled.jpg',
+				'./images/q_70.jpg'
+			], 5600);
+		}
 
 		// Proverb Carousel
 		let activeIndex = 0;

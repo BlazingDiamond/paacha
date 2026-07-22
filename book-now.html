@@ -74,15 +74,6 @@
   <script>
   initPage('');
 
-  const countryImgs = {
-    ZA:'./images/Suedafrika_Header.jpg',
-    ZW:'./images/simbabwe-laenderinformationen-afrika-naturkurs-guideausbildung-landschaft-sabbatjahr-natucate.webp',
-    MZ:'./images/01-mozambique-best-secret-beaches-1 (1).jpg',
-    ZM:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=700&h=460&fit=crop',
-    SZ:'./images/eswatini_ezulvinivalley.jpg',
-    LS:'./images/Lesotho-feature.jpg',
-  };
-
   function getTourStats(id) {
     const city = TOUR_DATA.cityTours.filter(t=>t.country===id).length;
     const multi = TOUR_DATA.countryTours.filter(t=>t.country===id).length;
@@ -96,7 +87,7 @@
     grid.innerHTML += `
       <a href="country.html?c=${id}" class="country-card block rounded-3xl overflow-hidden shadow-md group border border-stone-100">
         <div class="relative h-64 overflow-hidden">
-          <img src="${countryImgs[id]||c.heroImage}" alt="${c.name}" class="card-img w-full h-full object-cover">
+          <img src="${c.cardImage||c.heroImage}" alt="${c.name}" class="card-img w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"></div>
           <div class="absolute top-3 left-3 text-3xl">${c.flag}</div>
           ${totalTours>0?`<div class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-full">${totalTours} tour${totalTours>1?'s':''}</div>`:''}
@@ -116,6 +107,29 @@
         </div>
       </a>`;
   });
+
+  grid.innerHTML += `
+    <a href="Contact.html?type=custom-tour" class="country-card block rounded-3xl overflow-hidden shadow-md group border border-stone-100">
+      <div class="relative h-64 overflow-hidden">
+        <img src="./images/iStock-2066510109-HEADERMOBILE_(1).webp" alt="Custom Tour" class="card-img w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"></div>
+        <div class="absolute top-3 left-3 text-3xl">✨</div>
+        <div class="absolute top-3 right-3 bg-primary text-white text-xs font-bold px-2.5 py-1 rounded-full">Tailor-Made</div>
+        <div class="absolute bottom-0 left-0 right-0 p-5">
+          <h3 class="text-white font-['Playfair_Display'] text-2xl font-bold leading-tight">Custom Tour</h3>
+          <p class="text-white/75 text-sm mt-0.5">Build your own route with our team</p>
+        </div>
+      </div>
+      <div class="bg-white px-5 py-4 flex items-center justify-between gap-3">
+        <div class="flex gap-2 flex-wrap">
+          <span class="bg-primary/10 text-primary text-xs font-semibold px-2.5 py-1 rounded-full">Private planning</span>
+          <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full">Flexible dates</span>
+        </div>
+        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-stone-100 group-hover:bg-primary flex items-center justify-center transition-all">
+          <svg class="text-stone-500 group-hover:text-white transition-colors" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </a>`;
 
   const multiGrid = document.getElementById('multi-tour-grid');
   TOUR_DATA.multiCountryTours.forEach(t => {
